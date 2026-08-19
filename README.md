@@ -44,6 +44,12 @@ This system has two access levels. General users (buyers) can directly create an
   - Email: admin@parfy.id
   - Password: admin123
 
+## Developer
+
+This system was fully designed and developed by **[Attarreyzi](https://github.com/Attarreyzi)** as a full-stack web development implementation project. 
+
+You are welcome to use the source code of this project as a reference for academic purposes or independent learning.
+
 ---
 
 <h1 id="versi-indonesia">PARFY.ID (Versi Indonesia)</h1>
