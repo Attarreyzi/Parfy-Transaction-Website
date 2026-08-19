@@ -14,13 +14,15 @@ Fokus utama dari sistem ini adalah untuk memfasilitasi transaksi jual beli parfu
 - Dashboard admin untuk manajemen produk, pengelolaan stok, dan pemrosesan pesanan pembeli
 - Laporan analitik dan grafik statistik penjualan
 
-## Teknologi yang Digunakan
-- **Bahasa Pemrograman**: PHP 8 (Native) dan JavaScript (ES6)
-- **Basis Data**: MySQL / MariaDB
-- **Frontend**: HTML5, CSS3, dan Bootstrap 5
-- **Payment Gateway**: Midtrans Snap API
-- **Logistik**: RajaOngkir API
-- **AI & Notifikasi**: Perplexity AI (Chatbot) dan PHPMailer
+## Stack Teknologi
+- **Bahasa Pemrograman**: PHP, JavaScript
+- **Markup & Styling**: HTML, CSS, Bootstrap
+- **Basis Data**: MySQL
+- **Integrasi Sistem**:
+  - API Midtrans (Pemrosesan Transaksi)
+  - API RajaOngkir (Manajemen Logistik)
+  - API Perplexity (Sistem Chatbot AI)
+  - PHPMailer (Pengiriman Notifikasi Email)
 
 ## Konfigurasi dan Instalasi
 
