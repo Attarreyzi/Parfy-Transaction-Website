@@ -38,7 +38,7 @@ The application can be run in a local environment using XAMPP or similar web ser
 
 ## User Access
 
-This system has two access levels. General users (buyers) can directly create an account through the **Register** page. However, to access the system management panel, you can use the following default credentials:
+This system has two access levels. General users (buyers) can directly create an account through the Register page. However, to access the system management panel, you can use the following default credentials:
 
 - **Admin**
   - Email: admin@parfy.id
