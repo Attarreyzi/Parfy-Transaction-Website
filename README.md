@@ -26,7 +26,7 @@ Fokus utama dari sistem ini adalah untuk memfasilitasi transaksi jual beli parfu
 
 ## Konfigurasi dan Instalasi
 
-Aplikasi ini dapat dijalankan di environment lokal menggunakan XAMPP atau web server sejenis yang mendukung PHP 8 dan MySQL.
+Aplikasi ini dapat dijalankan di environment lokal menggunakan XAMPP atau web server sejenis yang mendukung PHP dan MySQL.
 
 1. Clone repositori ke dalam direktori root server lokal (misalnya `htdocs`).
 2. Buat basis data baru di MySQL dengan nama `parfy_db`, kemudian import file `database.sql` untuk membuat struktur tabel.
@@ -42,4 +42,4 @@ Sistem ini memiliki dua tingkatan hak akses. Pembeli dapat langsung membuat akun
   - Email: admin@parfy.id
   - Password: admin123
 
-Dikembang oleh Attarreyzi
+Dikembang oleh [Attarreyzi](https://github.com/Attarreyzi)
