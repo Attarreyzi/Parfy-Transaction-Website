@@ -36,14 +36,10 @@ Aplikasi ini dapat dijalankan di environment lokal menggunakan XAMPP atau web se
 
 ## Akses Pengguna
 
-Sistem ini memiliki dua tingkatan hak akses. Pengguna umum (pembeli) dapat langsung membuat akun melalui halaman **Daftar/Register**. Namun, untuk mengakses panel manajemen sistem, Anda dapat menggunakan kredensial bawaan berikut:
+Sistem ini memiliki dua tingkatan hak akses. Pembeli dapat langsung membuat akun melalui halaman **Daftar/Register**. Namun, untuk mengakses panel manajemen sistem, Anda dapat menggunakan kredensial bawaan berikut:
 
 - **Admin**
   - Email: admin@parfy.id
   - Password: admin123
 
-## Pengembang
-
-Sistem ini dirancang dan dikembangkan secara penuh oleh **[Attarreyzi](https://github.com/Attarreyzi)** sebagai proyek implementasi pengembangan web *full-stack*. 
-
-Anda dipersilakan untuk menggunakan kode sumber proyek ini sebagai referensi untuk keperluan akademik maupun pembelajaran mandiri.
+Dikembang oleh Attarreyzi
