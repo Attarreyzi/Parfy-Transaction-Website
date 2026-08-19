@@ -160,6 +160,29 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 10px;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -270px;
+                transition: 0.3s;
+                z-index: 1050;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+            }
+
+            .topbar {
+                justify-content: space-between !important;
+            }
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -202,6 +225,7 @@
     <div class="content">
 
         <div class="topbar">
+            <i class="bi bi-list fs-2 text-white d-md-none" id="sidebar-toggle" style="cursor: pointer;"></i>
             <div class="dropdown">
                 <div class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
@@ -322,6 +346,18 @@
 
             } catch (error) {
                 console.error('Error loading analysis data:', error);
+            }
+        });
+
+        // Sidebar Toggle Mobile
+        document.getElementById('sidebar-toggle')?.addEventListener('click', function() {
+            document.querySelector('.sidebar')?.classList.toggle('active');
+        });
+        document.addEventListener('click', (e) => {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== toggleBtn) {
+                sidebar.classList.remove('active');
             }
         });
     </script>

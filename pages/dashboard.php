@@ -651,6 +651,17 @@
                 font-size: 1.5rem;
                 text-align: center;
             }
+
+            .category-title {
+                font-size: 0.75rem !important;
+                font-weight: 600;
+            }
+
+            #chatbotModal {
+                width: 92vw !important;
+                right: 4vw !important;
+                bottom: 85px !important;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -746,27 +757,27 @@
 
     <div class="container menu-section" id="best-seller">
         <h2 class="section-title">Best Notes Parfum</h2>
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=woody'"
+        <div class="row justify-content-center g-2 g-md-3">
+            <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=woody'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/oud.jpg" alt="Woody">
                 </div>
-                <div class="category-title">WOODY</div>
+                <div class="category-title mt-2">WOODY</div>
             </div>
-            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=gourmand'"
+            <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=gourmand'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/vanilla.jpg" alt="Sweet">
                 </div>
-                <div class="category-title">SWEET & GOURMAND</div>
+                <div class="category-title mt-2">SWEET & GOURMAND</div>
             </div>
-            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=fresh'"
+            <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=fresh'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/fresh.jpg" alt="Fresh">
                 </div>
-                <div class="category-title">FRESH & AQUATIC</div>
+                <div class="category-title mt-2">FRESH & AQUATIC</div>
             </div>
         </div>
     </div>
