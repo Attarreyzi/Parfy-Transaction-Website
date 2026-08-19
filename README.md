@@ -85,7 +85,7 @@ Aplikasi ini dapat dijalankan di environment lokal menggunakan XAMPP atau web se
 
 ## Akses Pengguna
 
-Sistem ini memiliki dua tingkatan hak akses. Pengguna umum (pembeli) dapat langsung membuat akun melalui halaman **Daftar/Register**. Namun, untuk mengakses panel manajemen sistem, Anda dapat menggunakan kredensial bawaan berikut:
+Sistem ini memiliki dua tingkatan hak akses. Pengguna umum (pembeli) dapat langsung membuat akun melalui halaman Daftar/Register. Namun, untuk mengakses panel manajemen sistem, Anda dapat menggunakan kredensial bawaan berikut:
 
 - **Admin**
   - Email: admin@parfy.id
