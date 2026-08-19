@@ -1,0 +1,21 @@
+-- Update images to use local assets
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD001';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD002';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD003';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD004';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD005';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD006';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD007';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD008';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD009';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD010';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD011';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD012';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD013';
+UPDATE products SET image = '/assets/fresh.jpg' WHERE id = 'PRD014';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD015';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD016';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD017';
+UPDATE products SET image = '/assets/vanilla.jpg' WHERE id = 'PRD018';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD019';
+UPDATE products SET image = '/assets/oud.jpg' WHERE id = 'PRD020';

@@ -1,0 +1,17 @@
+# Environment and Local Configs
+.env
+.env.local
+
+# Python Scratch and Temp Scripts
+*.py
+__pycache__/
+
+# IDE and OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and Caches
+*.log
+.phpunit.result.cache

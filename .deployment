@@ -1,0 +1,17 @@
+# PARFY.ID - Azure Deployment
+
+## Ignore files
+*.log
+*.cache
+.env
+.env.local
+node_modules/
+vendor/
+.git/
+.vscode/
+.idea/
+
+## Keep these
+!.htaccess
+!web.config
+!.user.ini

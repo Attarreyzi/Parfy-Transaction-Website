@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parfy.ID Admin - Analysis</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            background: radial-gradient(circle at center, #005c97 0%, #0f1029 100%);
+            background-size: cover;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 270px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(6px);
+            padding-top: 25px;
+            height: 100vh;
+            color: white;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .brand-box {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .brand-box img {
+            width: 80px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .brand-box h4 {
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: 0.3s ease;
+            border-radius: 6px;
+            margin: 0 15px 5px 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-item i {
+            font-size: 22px;
+            margin-right: 12px;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.20);
+            padding-left: 32px;
+            color: white;
+        }
+
+        .menu-item.active {
+            background: rgba(255, 255, 255, 0.35);
+            border-left: 4px solid #ffffff;
+            padding-left: 32px;
+            font-weight: 600;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 35px;
+            width: calc(100% - 270px);
+            color: white;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .topbar i {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        #content-area {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .data-card .card-body {
+            color: white;
+        }
+
+        .data-card h1,
+        .data-card h2,
+        .data-card h3,
+        .data-card h4 {
+            font-weight: 600;
+        }
+
+        .table-custom {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-custom th {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            color: #f0f0f0;
+        }
+
+        .table-custom td,
+        .table-custom th {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.40);
+            color: white;
+        }
+            .menu-bottom {
+            margin-bottom: 20px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <div class="brand-box">
+            <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+            <h4>PARFY.ID</h4>
+        </div>
+
+        <a href="dashboard.php" class="menu-item">
+            <i class="bi bi-grid"></i> Dashboard
+        </a>
+        <a href="produk.php" class="menu-item">
+            <i class="bi bi-box-seam"></i> Produk
+        </a>
+        <a href="stok.php" class="menu-item">
+            <i class="bi bi-clipboard-check"></i> Stok
+        </a>
+        <a href="transaksi.php" class="menu-item">
+            <i class="bi bi-receipt"></i> Transaksi
+        </a>
+        <a href="user.php" class="menu-item">
+            <i class="bi bi-person"></i> User
+        </a>
+        <!-- Voucher telah dihapus -->
+        <a href="review.php" class="menu-item">
+            <i class="bi bi-star"></i> Review
+        </a>
+        <a href="analysis.php" class="menu-item active">
+            <i class="bi bi-graph-up"></i> Analysis
+        </a>
+    </div>
+
+    <div class="content">
+
+        <div class="topbar">
+            <div class="dropdown">
+                <div class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+                    <i class="bi bi-person-circle fs-4 me-2"></i>
+                    <span class="d-none d-md-block fw-bold">Admin PARFY</span>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="dropdownUser1">
+                    
+                    <li><a class="dropdown-item text-danger" href="#" onclick="PARFY.auth.logout()"><i
+                                class="bi bi-box-arrow-right me-2"></i> Keluar</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content-area">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <h3>Analysis</h3>
+
+                <!-- TOMBOL KEMBALI KE DASHBOARD -->
+                <a href="dashboard.php" class="btn btn-back">
+                    <i class="bi bi-arrow-left-circle me-2"></i> Kembali ke Dashboard
+                </a>
+            </div>
+
+            <p class="text-white-50">Analisis mendalam performa toko Anda.</p>
+
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <div class="card data-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Performa Kategori</h5>
+                            <div style="position: relative; height:300px; width:100%">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="card data-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Produk Terlaris</h5>
+                            <div class="table-responsive">
+                                <table class="table table-custom mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Produk</th>
+                                            <th>Terjual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="topProductsTable">
+                                        <tr>
+                                            <td colspan="2" class="text-center">Loading...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/coding web IMK/parfy-php/js/api.js?v=2"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = PARFY.getUser();
+            if (!user || user.role !== 'admin') {
+                window.location.href = '/coding web IMK/parfy-php/login';
+                return;
+            }
+
+            try {
+                // Fetch chart data
+                const chartData = await PARFY.dashboard.getChartData();
+                
+                // Render Category Chart
+                const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+                new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: chartData.categorySales.map(c => c.category),
+                        datasets: [{
+                            data: chartData.categorySales.map(c => c.sold),
+                            backgroundColor: [
+                                '#fa709a', '#fee140', '#00c6ff', '#0072ff', '#4facfe'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#fff' }
+                            }
+                        }
+                    }
+                });
+
+                // Fetch top products from dashboard API
+                const topProducts = await PARFY.dashboard.getTopProducts();
+                const productsTable = document.getElementById('topProductsTable');
+                if (topProducts.length > 0) {
+                    productsTable.innerHTML = topProducts.map(p => 
+                        `<tr><td>${p.name}</td><td>${p.sold}</td></tr>`
+                    ).join('');
+                } else {
+                    productsTable.innerHTML = '<tr><td colspan="2" class="text-center text-white-50">Belum ada data penjualan</td></tr>';
+                }
+
+            } catch (error) {
+                console.error('Error loading analysis data:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
