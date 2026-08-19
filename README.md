@@ -1,6 +1,6 @@
 # PARFY.ID
 
-PARFY.ID adalah aplikasi e-commerce berbasis web yang dirancang khusus untuk toko parfum premium. Aplikasi ini dibangun menggunakan native PHP, basis data MySQL, dan integrasi API pihak ketiga seperti Midtrans untuk pembayaran dan RajaOngkir untuk perhitungan biaya pengiriman otomatis.
+PARFY.ID adalah aplikasi e-commerce berbasis web yang dirancang khusus untuk toko parfum premium. Aplikasi ini dibangun menggunakan native PHP, basis data MySQL, dan integrasi API pihak ketiga seperti Midtrans untuk pembayaran dan BinderByte untuk data wilayah dan logistik otomatis.
 
 Fokus utama dari sistem ini adalah untuk memfasilitasi transaksi jual beli parfum secara online dengan antarmuka yang responsif, menyediakan rekomendasi produk secara interaktif, serta menyajikan dashboard admin untuk mengelola pesanan, memantau pergerakan stok, dan menganalisis laporan penjualan harian secara terstruktur.
 
@@ -20,7 +20,7 @@ Fokus utama dari sistem ini adalah untuk memfasilitasi transaksi jual beli parfu
 - **Basis Data**: MySQL
 - **Integrasi Sistem**:
   - API Midtrans (Pemrosesan Transaksi)
-  - API RajaOngkir (Manajemen Logistik)
+  - API BinderByte (Manajemen Logistik dan Wilayah)
   - API Perplexity (Sistem Chatbot AI)
   - PHPMailer (Pengiriman Notifikasi Email)
 
@@ -32,7 +32,8 @@ Aplikasi ini dapat dijalankan di environment lokal menggunakan XAMPP atau web se
 2. Buat basis data baru di MySQL dengan nama `parfy_db`, kemudian import file `database.sql` untuk membuat struktur tabel.
 3. Sesuaikan parameter koneksi basis data pada file `config/database.php`.
 4. Sesuaikan konfigurasi API Key Midtrans (Server Key dan Client Key) pada file `config/midtrans.php`.
-5. Buka tautan proyek melalui browser untuk mengakses aplikasi.
+5. Sesuaikan konfigurasi API Key BinderByte pada file `config/binderbyte.php`.
+6. Buka tautan proyek melalui browser untuk mengakses aplikasi.
 
 ## Akses Pengguna
 
