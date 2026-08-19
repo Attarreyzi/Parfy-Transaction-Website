@@ -42,10 +42,8 @@ Sistem ini memiliki dua tingkatan hak akses. Pengguna umum (pembeli) dapat langs
   - Email: admin@parfy.id
   - Password: admin123
 
-## Pengembang & Lisensi
+## Pengembang
 
-Sistem ini dirancang dan dikembangkan secara penuh oleh **[Attarreyzi](https://github.com/Attarreyzi)** sebagai proyek implementasi pengembangan web *full-stack*. Kode sumber proyek ini bersifat terbuka (*open-source*) dan dirilis di bawah **Lisensi MIT**. 
+Sistem ini dirancang dan dikembangkan secara penuh oleh **[Attarreyzi](https://github.com/Attarreyzi)** sebagai proyek implementasi pengembangan web *full-stack*. 
 
-Anda dipersilakan untuk menggunakan, mempelajari, memodifikasi, maupun mendistribusikan ulang sistem ini untuk keperluan akademik maupun pembelajaran.
-
-© 2026 **PARFY.ID** — Dikembangkan oleh Attarreyzi. Seluruh hak cipta dilindungi.
+Anda dipersilakan untuk menggunakan kode sumber proyek ini sebagai referensi untuk keperluan akademik maupun pembelajaran mandiri.
