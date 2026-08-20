@@ -1,19 +1,17 @@
 <?php
 /**
- * Midtrans Payment Gateway Configuration
- * Documentation: https://docs.midtrans.com
+ * Konfigurasi Payment Gateway Midtrans
  */
 
-// Sandbox/Production Mode
-// User confirmed Sandbox environment in Midtrans Dashboard
-define('MIDTRANS_IS_PRODUCTION', false); // Sandbox mode
+// Mode Sandbox / Production
+define('MIDTRANS_IS_PRODUCTION', false);
 
-// API Keys from Midtrans Dashboard
+// Kunci API Midtrans
 define('MIDTRANS_MERCHANT_ID', 'M185138293');
 define('MIDTRANS_CLIENT_KEY', 'YOUR_MIDTRANS_CLIENT_KEY');
 define('MIDTRANS_SERVER_KEY', 'YOUR_MIDTRANS_SERVER_KEY');
 
-// API URLs
+// URL API Midtrans
 define('MIDTRANS_SNAP_URL', MIDTRANS_IS_PRODUCTION
     ? 'https://app.midtrans.com/snap/snap.js'
     : 'https://app.sandbox.midtrans.com/snap/snap.js');
@@ -23,9 +21,7 @@ define('MIDTRANS_API_URL', MIDTRANS_IS_PRODUCTION
     : 'https://api.sandbox.midtrans.com/v2');
 
 /**
- * Create Snap Token for payment popup
- * @param array $transactionDetails Transaction data
- * @return array Response with token or error
+ * Membuat Snap Token transaksi pembayaran
  */
 function createSnapToken(array $transactionDetails): array
 {
@@ -55,28 +51,24 @@ function createSnapToken(array $transactionDetails): array
     curl_close($ch);
 
     if ($error) {
-        return ['error' => 'Connection error: ' . $error];
+        return ['error' => 'Gagal koneksi: ' . $error];
     }
 
     $result = json_decode($response, true);
 
     if ($httpCode !== 201 && $httpCode !== 200) {
-        return ['error' => $result['error_messages'][0] ?? 'Failed to create payment'];
+        return ['error' => $result['error_messages'][0] ?? 'Gagal membuat transaksi'];
     }
 
     return $result;
 }
 
 /**
- * Verify notification signature from Midtrans
- * @param string $orderId Order ID
- * @param string $statusCode Status code
- * @param string $grossAmount Gross amount
- * @param string $signatureKey Signature from notification
- * @return bool Is signature valid
+ * Verifikasi signature notifikasi dari Midtrans
  */
 function verifySignature(string $orderId, string $statusCode, string $grossAmount, string $signatureKey): bool
 {
     $expectedSignature = hash('sha512', $orderId . $statusCode . $grossAmount . MIDTRANS_SERVER_KEY);
     return $signatureKey === $expectedSignature;
 }
+
