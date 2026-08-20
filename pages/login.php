@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../config/google.php';
+$googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : '';
+$isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClientId, 'YOUR_GOOGLE_CLIENT_ID');
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -266,11 +271,13 @@
                     <span></span>
                 </div>
 
+                <?php if ($isRealGoogleClientId): ?>
                 <div id="g_id_onload"
-                     data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                     data-client_id="<?= htmlspecialchars($googleClientId) ?>"
                      data-callback="handleGoogleLogin"
                      data-auto_prompt="false">
                 </div>
+                <?php endif; ?>
 
                 <button type="button" class="google-btn" onclick="triggerGoogleLogin()">
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
@@ -295,6 +302,8 @@
     </div>
 
     <script>
+        const isRealGoogleId = <?= json_encode($isRealGoogleClientId) ?>;
+
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -377,16 +386,17 @@
         }
 
         function triggerGoogleLogin() {
-            if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+            if (isRealGoogleId && typeof google !== 'undefined' && google.accounts && google.accounts.id) {
                 google.accounts.id.prompt();
             } else {
                 Swal.fire({
                     title: 'Login dengan Google',
                     text: 'Masukkan alamat email Google Anda:',
                     input: 'email',
-                    inputPlaceholder: 'nama@gmail.com',
+                    inputPlaceholder: 'putrareyzi@gmail.com',
+                    inputValue: 'putrareyzi@gmail.com',
                     showCancelButton: true,
-                    confirmButtonText: 'Lanjutkan',
+                    confirmButtonText: 'Lanjutkan dengan Google',
                     cancelButtonText: 'Batal',
                     confirmButtonColor: '#005c97'
                 }).then(async (result) => {
@@ -404,7 +414,20 @@
                             if (res.ok) {
                                 localStorage.setItem('parfy_token', data.token);
                                 localStorage.setItem('parfy_user', JSON.stringify(data.user));
-                                window.location.href = '/coding web IMK/parfy-php/dashboard';
+
+                                Swal.fire({
+                                    title: 'Berhasil Login!',
+                                    text: 'Selamat datang, ' + data.user.name,
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    if (data.user.role === 'admin') {
+                                        window.location.href = '/coding web IMK/parfy-php/admin/dashboard.php';
+                                    } else {
+                                        window.location.href = '/coding web IMK/parfy-php/dashboard';
+                                    }
+                                });
                             } else {
                                 Swal.fire('Gagal', data.error || 'Gagal masuk dengan Google', 'error');
                             }
@@ -419,4 +442,4 @@
 
 </body>
 
-</html>
+</html>
