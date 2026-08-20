@@ -3,7 +3,7 @@
  * Konfigurasi Basis Data PARFY.ID
  */
 
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 define('DB_USER', getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('DB_PASS') ?: '');
 define('DB_NAME', getenv('DB_NAME') ?: 'parfy_db');
@@ -15,7 +15,7 @@ function getDB(): mysqli
 {
     static $conn = null;
 
-    if ($conn === null) {
+    if ($conn === null || !@$conn->ping()) {
         $conn = mysqli_init();
 
         $sslFlag = getenv('DB_HOST') ? MYSQLI_CLIENT_SSL : 0;
@@ -63,4 +63,31 @@ function generateId(string $prefix = 'user'): string
 {
     return $prefix . '-' . substr(bin2hex(random_bytes(4)), 0, 8);
 }
+
+/**
+ * Base URL helper untuk path relatif
+ */
+function url(string $path = ''): string
+{
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $base = preg_replace('#/(pages|api|forgot_password|admin)/.*$|/index\.php$#i', '', $scriptName);
+    $base = rtrim($base, '/');
+    $path = '/' . ltrim($path, '/');
+    return $base . $path;
+}
+
+/**
+ * Fix Image URL Helper
+ */
+function fixImageUrl(?string $url): string
+{
+    if (empty($url)) {
+        return url('/assets/default.jpg');
+    }
+    if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://') || str_starts_with($url, 'data:')) {
+        return $url;
+    }
+    return url($url);
+}
+
 

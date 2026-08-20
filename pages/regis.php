@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config/database.php'; ?>
 <?php
 require_once __DIR__ . '/../config/google.php';
 $googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
@@ -207,7 +208,7 @@ $googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_
         <!-- LEFT PANEL -->
         <div class="left">
             <div style="margin-bottom: 20px;">
-                <a href="/coding web IMK/parfy-php/"
+                <a href="<?php echo url('/'); ?>"
                     style="text-decoration: none; color: #555; font-size: 14px; display: flex; align-items: center; gap: 5px;">
                     <i class="fas fa-arrow-left"></i> Kembali ke Beranda
                 </a>
@@ -340,7 +341,7 @@ $googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_
                         timer: 1500,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = '/coding web IMK/parfy-php/dashboard';
+                        window.location.href = BASE_PATH + '/dashboard';
                     });
                 } else {
                     errorMsg.textContent = data.error || 'Gagal mendaftar dengan Google!';

@@ -62,39 +62,42 @@ function getCurrentUser(): ?array
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
     }
 
-    if (!preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
-        return null;
-    }
-
-    $token = $matches[1];
-    $payload = verifyToken($token);
-
-    $userIdRaw = $payload['userId'] ?? $payload['id'] ?? '';
-    if (!$payload || empty($userIdRaw))
-        return null;
-
     require_once __DIR__ . '/database.php';
     $db = getDB();
-    $userId = $db->real_escape_string($userIdRaw);
 
-    $result = $db->query("SELECT id, name, email, role, phone, gender, birth_date FROM users WHERE id = '$userId'");
-
-    if ($result && $result->num_rows > 0) {
-        return $result->fetch_assoc();
+    if (preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
+        $token = $matches[1];
+        $payload = verifyToken($token);
+        if ($payload && !empty($payload['userId'] ?? $payload['id'] ?? '')) {
+            $userIdRaw = $payload['userId'] ?? $payload['id'];
+            $userId = $db->real_escape_string($userIdRaw);
+            $result = $db->query("SELECT id, name, email, role, phone, gender, birth_date FROM users WHERE id = '$userId'");
+            if ($result && $result->num_rows > 0) {
+                return $result->fetch_assoc();
+            }
+        }
     }
 
-    return null;
+    // Default Guest User for 100% Guest Shopping
+    $guestResult = $db->query("SELECT id, name, email, role, phone, gender, birth_date FROM users WHERE id = 'USR-GUEST'");
+    if ($guestResult && $guestResult->num_rows > 0) {
+        return $guestResult->fetch_assoc();
+    }
+
+    return [
+        'id' => 'USR-GUEST',
+        'name' => 'Pembeli',
+        'email' => 'pembeli@parfy.id',
+        'role' => 'user'
+    ];
 }
 
 /**
- * Validasi otentikasi user
+ * Validasi otentikasi user (selalu sukses dengan session pembeli/guest)
  */
 function requireAuth(): array
 {
     $user = getCurrentUser();
-    if (!$user) {
-        jsonResponse(['error' => 'Akses ditolak. Token tidak valid atau kedaluwarsa.'], 401);
-    }
     return $user;
 }
 

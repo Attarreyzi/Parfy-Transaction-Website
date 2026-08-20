@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -704,8 +705,8 @@
     <button class="hamburger" onclick="toggleSidebar()">☰</button>
     <span class="page-title">Keranjang</span>
     <div class="mobile-icons">
-      <a href="/coding web IMK/parfy-php/dashboard">🏠</a>
-      <a href="/coding web IMK/parfy-php/pesanan">📦</a>
+      <a href="<?php echo url('/dashboard'); ?>">🏠</a>
+      <a href="<?php echo url('/pesanan'); ?>">📦</a>
     </div>
   </div>
 
@@ -715,25 +716,25 @@
   <div class="container">
     <div class="sidebar">
       <div class="logo">
-        <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+        <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo">
         <h2>PARFY.ID</h2>
         <p>TOKO PARFUM TERMURAH</p>
       </div>
 
       <div class="menu">
-        <div class="menu-item"><a href="/coding web IMK/parfy-php/akun"><svg viewBox="0 0 24 24">
+        <div class="menu-item"><a href="<?php echo url('/akun'); ?>"><svg viewBox="0 0 24 24">
               <path
                 d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>Akun Saya</a></div>
-        <div class="menu-item"><a href="/coding web IMK/parfy-php/pesanan"><svg viewBox="0 0 24 24">
+        <div class="menu-item"><a href="<?php echo url('/pesanan'); ?>"><svg viewBox="0 0 24 24">
               <path
                 d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
             </svg>Pesanan Saya</a></div>
-        <div class="menu-item"><a href="/coding web IMK/parfy-php/alamat"><svg viewBox="0 0 24 24">
+        <div class="menu-item"><a href="<?php echo url('/alamat'); ?>"><svg viewBox="0 0 24 24">
               <path
                 d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5Z" />
             </svg>Alamat</a></div>
-        <div class="menu-item active"><a href="/coding web IMK/parfy-php/keranjang"><svg viewBox="0 0 24 24">
+        <div class="menu-item active"><a href="<?php echo url('/keranjang'); ?>"><svg viewBox="0 0 24 24">
               <path
                 d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
             </svg>Keranjang</a></div>
@@ -746,7 +747,7 @@
         <span>Nama</span>
       </div>
 
-      <a class="btn-back" href="/coding web IMK/parfy-php/dashboard">← Kembali ke Dashboard</a>
+      <a class="btn-back" href="<?php echo url('/dashboard'); ?>">← Kembali ke Dashboard</a>
 
       <div class="content-card">
         <h1>Keranjang Belanja</h1>
@@ -782,7 +783,7 @@
         <div class="addr-box" id="selected-address-display">
           <em style="color:#999;">Pilih alamat pengiriman di atas</em>
         </div>
-        <a href="/coding web IMK/parfy-php/alamat" style="display:inline-block; margin-top:10px; font-size:13px; color:#0d3256;">+ Tambah Alamat
+        <a href="<?php echo url('/alamat'); ?>" style="display:inline-block; margin-top:10px; font-size:13px; color:#0d3256;">+ Tambah Alamat
           Baru</a>
       </div>
 
@@ -849,7 +850,7 @@
       <div class="success-icon">✅</div>
       <h2>Pesanan Berhasil!</h2>
       <p style="color:#777; margin-bottom:20px;">Pembayaran terkonfirmasi. Kami akan segera mengirimkan parfummu.</p>
-      <a href="/coding web IMK/parfy-php/pesanan" class="btn-checkout" style="text-decoration:none; display:inline-block;">Lihat Pesanan Saya</a>
+      <a href="<?php echo url('/pesanan'); ?>" class="btn-checkout" style="text-decoration:none; display:inline-block;">Lihat Pesanan Saya</a>
     </div>
   </div>
 
@@ -857,7 +858,7 @@
   <!-- Midtrans Snap JS -->
   <?php require_once __DIR__ . '/../config/midtrans.php'; ?>
   <script src="<?php echo MIDTRANS_SNAP_URL; ?>" data-client-key="<?php echo MIDTRANS_CLIENT_KEY; ?>"></script>
-  <script src="/coding web IMK/parfy-php/js/api.js"></script>
+  <script src="<?php echo url('/js/api.js'); ?>"></script>
   <script>
     let cartItems = [];
     let userAddresses = [];
@@ -875,7 +876,7 @@
 
       const user = PARFY.getUser();
       if (!user) {
-        window.location.href = '/coding web IMK/parfy-php/login';
+        window.location.href = BASE_PATH + '/login';
         return false;
       }
       document.querySelector('.profile-header span').textContent = user.name || 'User';
@@ -904,7 +905,7 @@
             <div style="font-size:60px; margin-bottom:20px;">🛒</div>
             <h3>Keranjang Kosong</h3>
             <p>Yuk mulai belanja parfum favoritmu!</p>
-            <a href="/coding web IMK/parfy-php/dashboard" class="btn-checkout" style="text-decoration:none; display:inline-block; margin-top:15px;">Belanja Sekarang</a>
+            <a href="<?php echo url('/dashboard'); ?>" class="btn-checkout" style="text-decoration:none; display:inline-block; margin-top:15px;">Belanja Sekarang</a>
           </div>
         `;
         updateSummary();
@@ -932,7 +933,7 @@
           return `
             <div class="cart-item" data-id="${item.productId}">
               <div class="checkbox-wrapper"><input type="checkbox" checked onchange="updateSummary()"></div>
-              <img src="${productImage}" alt="${item.product?.name || 'Produk'}" class="item-img" onerror="this.onerror=null; this.src='/coding web IMK/parfy-php/foto/default.jpg';">
+              <img src="${productImage}" alt="${item.product?.name || 'Produk'}" class="item-img" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';">
               <div class="item-details">
                 <h4>${item.product?.name || 'Produk'}</h4>
                 <div class="variant">Qty: ${item.quantity}</div>
@@ -1161,7 +1162,7 @@
             <div style="color:#dc3545; margin-bottom:10px;">
               <strong>Belum ada alamat pengiriman</strong>
             </div>
-            <a href="/coding web IMK/parfy-php/alamat" class="btn-checkout" style="text-decoration:none; background:#6c757d; font-size:14px; padding:5px 15px;">+ Tambah Alamat</a>
+            <a href="<?php echo url('/alamat'); ?>" class="btn-checkout" style="text-decoration:none; background:#6c757d; font-size:14px; padding:5px 15px;">+ Tambah Alamat</a>
           `;
         }
       } catch (error) {
@@ -1217,7 +1218,7 @@
       // Check if address exists
       if (userAddresses.length === 0) {
         Swal.fire('Error!', "⚠️ Mohon tambahkan alamat pengiriman terlebih dahulu sebelum checkout!", 'error');
-        window.location.href = '/coding web IMK/parfy-php/alamat';
+        window.location.href = BASE_PATH + '/alamat';
         return;
       }
 
@@ -1303,7 +1304,7 @@
           onPending: function (result) {
             console.log('Payment pending:', result);
             Swal.fire('Informasi', 'Pembayaran pending. Silakan selesaikan pembayaran Anda.', 'info');
-            window.location.href = '/coding web IMK/parfy-php/pesanan';
+            window.location.href = BASE_PATH + '/pesanan';
           },
           onError: function (result) {
             console.log('Payment error:', result);

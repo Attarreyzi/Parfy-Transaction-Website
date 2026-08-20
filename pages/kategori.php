@@ -476,14 +476,14 @@ if ($isPromo) {
     <nav class="navbar navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#" onclick="goToHome(); return false;">
-                <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+                <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo">
                 <span>PARFY.ID</span>
             </a>
             <div class="d-flex align-items-center gap-3">
                 <a href="#" onclick="goBack(); return false;" class="back-btn">
                     <i class="bi bi-arrow-left"></i> Kembali
                 </a>
-                <a href="/coding web IMK/parfy-php/keranjang" id="cartLink"
+                <a href="<?php echo url('/keranjang'); ?>" id="cartLink"
                     style="color:white; font-size:1.5rem; position:relative; display:none;">
                     <i class="bi bi-cart"></i>
                     <span id="cart-count" class="badge bg-danger rounded-circle"
@@ -509,7 +509,7 @@ if ($isPromo) {
                     <i class="bi bi-box-seam"></i>
                     <h3>Belum Ada Produk</h3>
                     <p>Produk dengan kategori ini belum tersedia.</p>
-                    <a href="/coding web IMK/parfy-php/" class="back-btn mt-3">
+                    <a href="<?php echo url('/'); ?>" class="back-btn mt-3">
                         <i class="bi bi-house"></i> Kembali ke Beranda
                     </a>
                 </div>
@@ -543,7 +543,7 @@ if ($isPromo) {
                                 <div class="promo-img-wrap">
                                     <img src="<?php echo htmlspecialchars($image); ?>"
                                         alt="<?php echo htmlspecialchars($shortName); ?>"
-                                        onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+                                        onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>'">
                                 </div>
                                 <div class="promo-name"><?php echo htmlspecialchars($shortName); ?></div>
                                 <div class="promo-price">
@@ -589,7 +589,7 @@ if ($isPromo) {
                                 <div class="product-img-container">
                                     <img src="<?php echo htmlspecialchars($image); ?>" class="product-img"
                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                        onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+                                        onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>'">
                                 </div>
 
                                 <div class="product-name-bar">
@@ -613,7 +613,7 @@ if ($isPromo) {
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/coding web IMK/parfy-php/js/api.js"></script>
+    <script src="<?php echo url('/js/api.js'); ?>"></script>
     <script>
         // Check if user is logged in for cart actions
         function isLoggedIn() {
@@ -631,9 +631,9 @@ if ($isPromo) {
         // Smart navigation - respect login state
         function goToHome() {
             if (isLoggedIn()) {
-                window.location.href = '/coding web IMK/parfy-php/dashboard';
+                window.location.href = BASE_PATH + '/dashboard';
             } else {
-                window.location.href = '/coding web IMK/parfy-php/';
+                window.location.href = BASE_PATH + '/';
             }
         }
 
@@ -659,7 +659,7 @@ if ($isPromo) {
                 background: '#ffffff'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/coding web IMK/parfy-php/login';
+                    window.location.href = BASE_PATH + '/login';
                 }
             });
         }
@@ -703,7 +703,7 @@ if ($isPromo) {
 
             try {
                 await PARFY.cart.add(productId, 1);
-                window.location.href = '/coding web IMK/parfy-php/keranjang';
+                window.location.href = BASE_PATH + '/keranjang';
             } catch (error) {
                 Swal.fire('Error!', error.message, 'error');
             }

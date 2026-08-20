@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -673,7 +674,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container-fluid px-4 px-lg-5">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+                <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo">
                 <span>PARFY.ID</span>
             </a>
 
@@ -710,14 +711,14 @@
                     <div id="searchResultsDropdown" class="search-results-dropdown" style="display: none; position: absolute; top: calc(100% + 12px); right: 0; width: 340px; max-height: 400px; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 1050; padding: 10px;">
                     </div>
                 </div>
-                <a href="/coding web IMK/parfy-php/keranjang" style="color:inherit; margin-right: 15px;"><i class="bi bi-cart" title="Cart"></i><span id="cart-count"
+                <a href="<?php echo url('/keranjang'); ?>" style="color:inherit; margin-right: 15px;"><i class="bi bi-cart" title="Cart"></i><span id="cart-count"
                         class="badge bg-danger"
                         style="font-size:0.6rem; position:relative; top:-8px; left:-5px; display:none;">0</span></a>
                 <div class="dropdown">
                     <i class="bi bi-person-circle dropdown-toggle" title="Profile" data-bs-toggle="dropdown"
                         style="cursor:pointer; font-size:1.2rem;"></i>
                     <ul class="dropdown-menu dropdown-menu-end" style="min-width: 150px; padding: 0.5rem 0; margin: 0; font-size: 1rem; text-align: left; background-color: #343a40; border: 1px solid rgba(255,255,255,.15); border-radius: 0.25rem;">
-    <li><a class="dropdown-item" href="/coding web IMK/parfy-php/akun" style="padding: 0.5rem 1rem; font-size: 1rem; font-weight: 400; color: #fff; text-align: left; display: flex; align-items: center;"><i class="bi bi-person me-2" style="font-size: 1.1rem; display: inline-block;"></i>Akun Saya</a></li>
+    <li><a class="dropdown-item" href="<?php echo url('/akun'); ?>" style="padding: 0.5rem 1rem; font-size: 1rem; font-weight: 400; color: #fff; text-align: left; display: flex; align-items: center;"><i class="bi bi-person me-2" style="font-size: 1.1rem; display: inline-block;"></i>Akun Saya</a></li>
     <li><hr class="dropdown-divider" style="margin: 0.5rem 0;"></li>
     <li><a class="dropdown-item text-danger" href="#" onclick="PARFY.auth.logout()" style="padding: 0.5rem 1rem; font-size: 1rem; font-weight: 400; color: #dc3545; text-align: left; display: flex; align-items: center;"><i class="bi bi-box-arrow-right me-2" style="font-size: 1.1rem; display: inline-block;"></i>Logout</a></li>
 </ul>
@@ -744,7 +745,7 @@
                 </div>
                 <div class="col-md-5 text-center mb-4 mb-md-0">
                     <div class="hero-image-container">
-                        <img src="/coding web IMK/parfy-php/assets/logotengah.png" alt="Hero Parfum">
+                        <img src="<?php echo url('/assets/'); ?>logotengah.png" alt="Hero Parfum">
                     </div>
                 </div>
                 <div
@@ -761,21 +762,21 @@
             <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=woody'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
-                    <img src="/coding web IMK/parfy-php/assets/oud.jpg" alt="Woody">
+                    <img src="<?php echo url('/assets/'); ?>oud.jpg" alt="Woody">
                 </div>
                 <div class="category-title mt-2">WOODY</div>
             </div>
             <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=gourmand'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
-                    <img src="/coding web IMK/parfy-php/assets/vanilla.jpg" alt="Sweet">
+                    <img src="<?php echo url('/assets/'); ?>vanilla.jpg" alt="Sweet">
                 </div>
                 <div class="category-title mt-2">SWEET & GOURMAND</div>
             </div>
             <div class="col-4 col-md-4 category-item text-center" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=fresh'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
-                    <img src="/coding web IMK/parfy-php/assets/fresh.jpg" alt="Fresh">
+                    <img src="<?php echo url('/assets/'); ?>fresh.jpg" alt="Fresh">
                 </div>
                 <div class="category-title mt-2">FRESH & AQUATIC</div>
             </div>
@@ -789,10 +790,10 @@
         </div>
         <div class="row row-cols-2 row-cols-md-5 justify-content-center">
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=PRD001'">
+                onclick="window.location.href='<?php echo url('/detail-produk?id=PRD001'); ?>'">
                 <span class="discount-badge">-15%</span>
-                <div class="promo-img-wrap"><img src="https://placehold.co/300x300/e91e63/white?text=Stilettos"
-                        alt="Stilettos"></div>
+                <div class="promo-img-wrap"><img src="<?php echo url('/assets/fresh.jpg'); ?>"
+                        alt="Stilettos" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';"></div>
                 <div class="promo-name">Stilettos</div>
                 <div class="promo-price">
                     <span class="original">Rp 200.000</span>
@@ -800,10 +801,10 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=PRD002'">
+                onclick="window.location.href='<?php echo url('/detail-produk?id=PRD002'); ?>'">
                 <span class="discount-badge">-20%</span>
-                <div class="promo-img-wrap"><img src="https://placehold.co/300x300/ffb6c1/333?text=Baby+Love"
-                        alt="Baby Love"></div>
+                <div class="promo-img-wrap"><img src="<?php echo url('/assets/vanilla.jpg'); ?>"
+                        alt="Baby Love" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';"></div>
                 <div class="promo-name">Baby Love</div>
                 <div class="promo-price">
                     <span class="original">Rp 169.000</span>
@@ -811,9 +812,10 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=PRD011'">
+                onclick="window.location.href='<?php echo url('/detail-produk?id=PRD011'); ?>'">
                 <span class="discount-badge">-12%</span>
-                <div class="promo-img-wrap"><img src="https://placehold.co/300x300/8b0000/white?text=ORGSM" alt="ORGSM">
+                <div class="promo-img-wrap"><img src="<?php echo url('/assets/vanilla.jpg'); ?>" alt="ORGSM"
+                        onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';">
                 </div>
                 <div class="promo-name">HMNS ORGSM</div>
                 <div class="promo-price">
@@ -822,10 +824,10 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=PRD008'">
+                onclick="window.location.href='<?php echo url('/detail-produk?id=PRD008'); ?>'">
                 <span class="discount-badge">-17%</span>
-                <div class="promo-img-wrap"><img src="https://placehold.co/300x300/d2691e/white?text=Moroccan"
-                        alt="Moroccan Vanilla"></div>
+                <div class="promo-img-wrap"><img src="<?php echo url('/assets/oud.jpg'); ?>"
+                        alt="Moroccan Vanilla" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';"></div>
                 <div class="promo-name">Moroccan Vanilla</div>
                 <div class="promo-price">
                     <span class="original">Rp 350.000</span>
@@ -833,9 +835,10 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=PRD014'">
+                onclick="window.location.href='<?php echo url('/detail-produk?id=PRD014'); ?>'">
                 <span class="discount-badge">-10%</span>
-                <div class="promo-img-wrap"><img src="https://placehold.co/300x300/006400/white?text=Alpha" alt="Alpha">
+                <div class="promo-img-wrap"><img src="<?php echo url('/assets/fresh.jpg'); ?>" alt="Alpha"
+                        onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>';">
                 </div>
                 <div class="promo-name">HMNS Alpha</div>
                 <div class="promo-price">
@@ -871,8 +874,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/coding web IMK/parfy-php/js/api.js"></script>
+    <script src="<?php echo url('/js/api.js'); ?>"></script>
     <script>
+        const BASE_PATH = window.location.pathname.includes('/parfy-php') 
+            ? window.location.pathname.substring(0, window.location.pathname.indexOf('/parfy-php') + 10) 
+            : '';
+
+        function fixImgUrl(url) {
+            if (!url) return BASE_PATH + '/assets/default.jpg';
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+            if (url.startsWith('/')) return BASE_PATH + url;
+            return BASE_PATH + '/' + url;
+        }
+
         let allProducts = [];
         let currentPage = 1;
         const productsPerPage = 8;
@@ -887,27 +901,29 @@
             return 'Rp ' + price;
         }
 
-        // Render product card - clicks redirect to login
+        // Render product card
         function renderProductCard(product) {
-            const image = Array.isArray(product.images) && product.images[0]
+            const rawImage = Array.isArray(product.images) && product.images[0]
                 ? product.images[0]
-                : (product.image || '/foto/default.jpg');
+                : (product.image || '/assets/default.jpg');
+            const image = fixImgUrl(rawImage);
+            const detailUrl = BASE_PATH + '/detail-produk?id=' + product.id;
 
             return `
             <div class="col-6 col-md-3">
-                <div class="product-card" style="cursor: pointer;" onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=${product.id}'">
+                <div class="product-card" style="cursor: pointer;" onclick="window.location.href='${detailUrl}'">
                     ${product.sold > 50 ? '<span class="badge-hot">HOT</span>' : ''}
                     <div class="icon-cart-card" onclick="event.stopPropagation(); addToCart('${product.id}')" title="Tambah ke Keranjang">
                         <i class="bi bi-basket"></i>
                     </div>
                     
                     <div class="product-img-container">
-                        <img src="${image}" class="product-img" alt="${product.name}" 
-                             onerror="this.onerror=null; this.src='/coding web IMK/parfy-php/foto/default.jpg';">
+                        <img src="${image}" class="product-img" alt="${escapeHtml(product.name)}" 
+                             onerror="this.onerror=null; this.src='${BASE_PATH}/assets/default.jpg';">
                     </div>
 
                     <div class="product-name-bar">
-                        <span class="product-title">${product.name}</span>
+                        <span class="product-title">${escapeHtml(product.name)}</span>
                         <div class="product-like"><i class="bi bi-heart-fill text-white"></i></div>
                     </div>
 
@@ -1117,7 +1133,7 @@
                             const img = Array.isArray(p.images) && p.images[0] ? p.images[0] : (p.image || '/coding web IMK/parfy-php/foto/default.jpg');
                             return `
                                 <div class="search-result-item" onclick="selectSearchProduct('${escapeHtml(p.name)}')">
-                                    <img src="${img}" class="search-result-img" alt="${escapeHtml(p.name)}" onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+                                    <img src="${img}" class="search-result-img" alt="${escapeHtml(p.name)}" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>'">
                                     <div class="search-result-info">
                                         <div class="search-result-title">${escapeHtml(p.name)}</div>
                                         <div class="search-result-meta">
@@ -1214,7 +1230,7 @@
         
         async function addToCart(productId) {
             try {
-                const res = await fetch('/coding web IMK/parfy-php/api/cart/index.php', {
+                const res = await fetch(BASE_PATH + '/api/cart/index.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1228,7 +1244,7 @@
                     // Optionally update cart count if there's a function for it
                 } else {
                     if(res.status === 401) {
-                        window.location.href = '/coding web IMK/parfy-php/login';
+                        window.location.href = BASE_PATH + '/login';
                     } else {
                         Swal.fire('Error!', data.error || 'Gagal menambahkan ke keranjang', 'error');
                     }
@@ -1240,7 +1256,7 @@
 
         async function buyNow(productId) {
             try {
-                const res = await fetch('/coding web IMK/parfy-php/api/cart/index.php', {
+                const res = await fetch(BASE_PATH + '/api/cart/index.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1250,10 +1266,10 @@
                 });
                 const data = await res.json();
                 if(res.ok) {
-                    window.location.href = '/coding web IMK/parfy-php/keranjang';
+                    window.location.href = BASE_PATH + '/keranjang';
                 } else {
                     if(res.status === 401) {
-                        window.location.href = '/coding web IMK/parfy-php/login';
+                        window.location.href = BASE_PATH + '/login';
                     } else {
                         Swal.fire('Error!', data.error || 'Gagal', 'error');
                     }
@@ -1265,7 +1281,13 @@
 
         async function fetchProducts() {
             try {
-                const response = await fetch('/coding web IMK/parfy-php/api/products/index.php');
+                let response;
+                try {
+                    response = await fetch('/api/products/index.php');
+                    if (!response.ok) throw new Error('Primary failed');
+                } catch (e) {
+                    response = await fetch(BASE_PATH + '/api/products/index.php');
+                }
                 const data = await response.json();
 
                 // Handle different response formats
@@ -1297,7 +1319,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo" style="height:60px; margin-right:15px;">
+                        <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo" style="height:60px; margin-right:15px;">
                         <span
                             style="font-family: 'Playfair Display', serif; font-size:1.5rem; font-weight:bold;">PARFY.ID</span>
                     </div>
@@ -1309,9 +1331,9 @@
                     <ul style="list-style:none; padding:0; opacity:0.8;">
                         <li style="margin-bottom:10px;"><a href="#collection-section"
                                 style="color:white; text-decoration:none;">Parfum</a></li>
-                        <li style="margin-bottom:10px;"><a href="/coding web IMK/parfy-php/login"
+                        <li style="margin-bottom:10px;"><a href="<?php echo url('/login'); ?>"
                                 style="color:white; text-decoration:none;">Login</a></li>
-                        <li style="margin-bottom:10px;"><a href="/coding web IMK/parfy-php/register"
+                        <li style="margin-bottom:10px;"><a href="<?php echo url('/register'); ?>"
                                 style="color:white; text-decoration:none;">Register</a></li>
                     </ul>
                 </div>

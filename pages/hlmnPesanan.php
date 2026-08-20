@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -444,8 +445,8 @@
     <button class="hamburger" onclick="toggleSidebar()">☰</button>
     <span class="page-title">Pesanan Saya</span>
     <div class="mobile-icons">
-      <a href="/coding web IMK/parfy-php/dashboard">🏠</a>
-      <a href="/coding web IMK/parfy-php/keranjang">🛒</a>
+      <a href="<?php echo url('/dashboard'); ?>">🏠</a>
+      <a href="<?php echo url('/keranjang'); ?>">🛒</a>
     </div>
   </div>
 
@@ -455,14 +456,14 @@
   <div class="container">
     <div class="sidebar">
       <div class="logo">
-        <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+        <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo">
         <h2>PARFY.ID</h2>
         <p>TOKO PARFUM TERMURAH</p>
       </div>
 
       <div class="menu">
         <div class="menu-item" data-page="akun">
-          <a href="/coding web IMK/parfy-php/akun">
+          <a href="<?php echo url('/akun'); ?>">
             <svg viewBox="0 0 24 24">
               <path
                 d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -471,7 +472,7 @@
           </a>
         </div>
         <div class="menu-item active" data-page="pesanan">
-          <a href="/coding web IMK/parfy-php/pesanan">
+          <a href="<?php echo url('/pesanan'); ?>">
             <svg viewBox="0 0 24 24">
               <path
                 d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
@@ -480,7 +481,7 @@
           </a>
         </div>
         <div class="menu-item" data-page="alamat">
-          <a href="/coding web IMK/parfy-php/alamat">
+          <a href="<?php echo url('/alamat'); ?>">
             <svg viewBox="0 0 24 24">
               <path
                 d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5Z" />
@@ -489,7 +490,7 @@
           </a>
         </div>
         <div class="menu-item" data-page="keranjang">
-          <a href="/coding web IMK/parfy-php/keranjang">
+          <a href="<?php echo url('/keranjang'); ?>">
             <svg viewBox="0 0 24 24">
               <path
                 d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
@@ -506,13 +507,13 @@
         <span id="profileName">User</span> &nbsp; <span style="font-size:12px">▼</span>
 
         <div class="profile-dropdown" id="profileDropdown">
-          <a href="/coding web IMK/parfy-php/keranjang">Keranjang</a>
+          <a href="<?php echo url('/keranjang'); ?>">Keranjang</a>
           <div style="height:1px; background:#eee; margin:5px 0;"></div>
           <a href="#" class="logout-btn" onclick="PARFY.auth.logout()">Keluar</a>
         </div>
       </div>
 
-      <a class="btn-back" href="/coding web IMK/parfy-php/dashboard">← Kembali ke Dashboard</a>
+      <a class="btn-back" href="<?php echo url('/dashboard'); ?>">← Kembali ke Dashboard</a>
 
       <div class="content-card">
         <h1>Pesanan Saya</h1>
@@ -674,13 +675,13 @@
 
   </style>
 
-  <script src="/coding web IMK/parfy-php/js/api.js"></script>
+  <script src="<?php echo url('/js/api.js'); ?>"></script>
   <script>
     // Check if user is logged in
     function checkAuth() {
       const user = PARFY.getUser();
       if (!user) {
-        window.location.href = '/coding web IMK/parfy-php/login';
+        window.location.href = BASE_PATH + '/login';
         return false;
       }
       document.querySelector('#profileName').textContent = user.name || 'User';
@@ -730,7 +731,7 @@
             <div style="font-size:60px; margin-bottom:20px;">📦</div>
             <h3>Belum ada pesanan</h3>
             <p>Pesananmu akan muncul di sini setelah checkout.</p>
-            <a href="/coding web IMK/parfy-php/dashboard" style="
+            <a href="<?php echo url('/dashboard'); ?>" style="
               text-decoration:none; 
               display:inline-block; 
               margin-top:15px;
@@ -770,7 +771,7 @@
         return `
           <div class="order-item">
             <div class="order-left">
-              <img src="${productImage}" alt="produk" class="order-img" onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+              <img src="${productImage}" alt="produk" class="order-img" onerror="this.onerror=null; this.src='<?php echo url('/assets/default.jpg'); ?>'">
               <div class="order-info">
                 <h4>${firstItem?.product?.name || firstItem?.productName || 'Produk'}${order.items && order.items.length > 1 ? ` +${order.items.length - 1} lainnya` : ''}</h4>
                 <p>Qty: ${itemCount} · Total: ${formatPrice(order.total)}</p>

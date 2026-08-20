@@ -32,14 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $row = $result->fetch_assoc();
 
     // Decode images JSON or use legacy single image
-    $images = [];
+    $rawImages = [];
     if (!empty($row['image'])) {
         $decoded = json_decode($row['image'], true);
         if (is_array($decoded)) {
-            $images = $decoded;
+            $rawImages = $decoded;
         } else {
-            $images = [$row['image']];
+            $rawImages = [$row['image']];
         }
+    }
+    $images = array_map('fixImageUrl', array_filter($rawImages));
+    if (empty($images)) {
+        $images = [fixImageUrl('/assets/default.jpg')];
     }
 
     jsonResponse([
@@ -52,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'size' => $row['size'],
         'aroma' => $row['aroma'],
         'description' => $row['description'],
-        'image' => $images[0] ?? '', // First image for backward compatibility
+        'image' => $images[0], // First image for backward compatibility
         'images' => $images, // All images as array
         'scent_category' => $row['scent_category'] ?? '',
         'sold' => (int) $row['sold'],

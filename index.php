@@ -7,7 +7,7 @@
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/config/jwt.php';
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 // Remove /parfy-php and any parent folders from the URI
 $uri = preg_replace('#^.*/parfy-php#i', '', $uri);
@@ -81,7 +81,17 @@ $routes = [
     '/forgot-password' => '/forgot_password/lupa_password.php',
     '/lupa-password' => '/forgot_password/lupa_password.php',
     '/verify-otp' => '/forgot_password/verify_otp.php',
-    '/reset-password' => '/forgot_password/reset_password.php'
+    '/reset-password' => '/forgot_password/reset_password.php',
+    '/admin' => '/admin/login.php',
+    '/admin/' => '/admin/login.php',
+    '/admin/login' => '/admin/login.php',
+    '/admin/dashboard' => '/admin/dashboard.php',
+    '/admin/produk' => '/admin/produk.php',
+    '/admin/stok' => '/admin/stok.php',
+    '/admin/transaksi' => '/admin/transaksi.php',
+    '/admin/user' => '/admin/user.php',
+    '/admin/review' => '/admin/review.php',
+    '/admin/analysis' => '/admin/analysis.php'
 ];
 
 

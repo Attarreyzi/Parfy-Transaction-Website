@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config/database.php'; ?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -343,12 +344,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-custom fixed-top">
         <div class="container px-4">
-            <a class="navbar-brand d-flex align-items-center" id="brandLogo" href="/coding web IMK/parfy-php/dashboard">
-                <img src="/coding web IMK/parfy-php/assets/logo_parfum_bk.png" alt="Logo">
+            <a class="navbar-brand d-flex align-items-center" id="brandLogo" href="<?php echo url('/dashboard'); ?>">
+                <img src="<?php echo url('/assets/'); ?>logo_parfum_bk.png" alt="Logo">
                 <span>PARFY.ID</span>
             </a>
             <div class="d-flex align-items-center">
-                <a href="/coding web IMK/parfy-php/keranjang" onclick="return handleCartClick(event)" style="color:white; font-size:1.5rem; position:relative;">
+                <a href="<?php echo url('/keranjang'); ?>" onclick="return handleCartClick(event)" style="color:white; font-size:1.5rem; position:relative;">
                     <i class="bi bi-cart"></i>
                     <span id="cart-count" class="badge bg-danger rounded-circle"
                         style="font-size:0.6rem; position:absolute; top:-5px; right:-8px; display:none;">0</span>
@@ -358,7 +359,7 @@
     </nav>
 
     <div class="container">
-        <a href="/coding web IMK/parfy-php/dashboard" class="back-link" id="navBackLink">
+        <a href="<?php echo url('/dashboard'); ?>" class="back-link" id="navBackLink">
             <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
         </a>
 
@@ -370,7 +371,7 @@
                         <div class="slider-wrapper" id="sliderWrapper">
                             <div class="slider-track" id="sliderTrack">
                                 <div class="slider-slide">
-                                    <img id="product-img" src="/coding web IMK/parfy-php/foto/default.jpg" alt="Produk">
+                                    <img id="product-img" src="<?php echo url('/foto/'); ?>default.jpg" alt="Produk">
                                 </div>
                             </div>
                             <button class="slider-arrow prev-arrow" id="prevSlideBtn" onclick="slideImage(-1)" style="display:none;" title="Foto Sebelumnya">
@@ -467,7 +468,7 @@
                 </div>
             </div>
         </div>
-    <script src="/coding web IMK/parfy-php/js/api.js?v=2"></script>
+    <script src="<?php echo url('/js/api.js'); ?>?v=2"></script>
     <!-- Review Modal -->
     <div id="reviewModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
       <div style="background:white; padding:30px; border-radius:15px; width:90%; max-width:400px; position:relative; box-shadow:0 5px 20px rgba(0,0,0,0.2);">
@@ -490,6 +491,17 @@
     </div>
 
 <script>
+        const BASE_PATH = window.location.pathname.includes('/parfy-php') 
+            ? window.location.pathname.substring(0, window.location.pathname.indexOf('/parfy-php') + 10) 
+            : '';
+
+        function fixImgUrl(url) {
+            if (!url) return BASE_PATH + '/assets/default.jpg';
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+            if (url.startsWith('/')) return BASE_PATH + url;
+            return BASE_PATH + '/' + url;
+        }
+
         let currentProduct = null;
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
@@ -508,7 +520,7 @@
                 background: '#ffffff'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/coding web IMK/parfy-php/login';
+                    window.location.href = BASE_PATH + '/login';
                 }
             });
         }
@@ -528,9 +540,9 @@
             const navBackLink = document.getElementById('navBackLink');
 
             if (!user) {
-                if (brandLogo) brandLogo.href = '/coding web IMK/parfy-php/';
+                if (brandLogo) brandLogo.href = BASE_PATH + '/';
                 if (navBackLink) {
-                    navBackLink.href = '/coding web IMK/parfy-php/';
+                    navBackLink.href = BASE_PATH + '/';
                     navBackLink.innerHTML = '<i class="bi bi-arrow-left"></i> Kembali ke Beranda';
                 }
             } else {
@@ -541,7 +553,7 @@
                 loadProductDetail(productId);
             } else {
                 Swal.fire('Info', 'Produk tidak ditemukan!', 'info');
-                window.location.href = user ? '/coding web IMK/parfy-php/dashboard' : '/coding web IMK/parfy-php/';
+                window.location.href = user ? BASE_PATH + '/dashboard' : BASE_PATH + '/';
             }
         });
 
@@ -568,7 +580,7 @@
 
         function renderProductImages(images) {
             if (!Array.isArray(images) || images.length === 0) {
-                const single = currentProduct && currentProduct.image ? currentProduct.image : '/coding web IMK/parfy-php/foto/default.jpg';
+                const single = currentProduct && currentProduct.image ? currentProduct.image : BASE_PATH + '/assets/default.jpg';
                 images = [single];
             }
             // Limit to max 3 images matching admin capability
@@ -585,7 +597,7 @@
 
             track.innerHTML = productImagesList.map((img, idx) => `
                 <div class="slider-slide">
-                    <img src="${img}" alt="${currentProduct ? escapeHtml(currentProduct.name) : 'Produk'} - Foto ${idx + 1}" onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+                    <img src="${fixImgUrl(img)}" alt="${currentProduct ? escapeHtml(currentProduct.name) : 'Produk'} - Foto ${idx + 1}" onerror="this.onerror=null; this.src='${BASE_PATH}/assets/default.jpg';">
                 </div>
             `).join('');
 
@@ -597,7 +609,7 @@
                     thumbGallery.style.display = 'flex';
                     thumbGallery.innerHTML = productImagesList.map((img, idx) => `
                         <div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})">
-                            <img src="${img}" alt="Thumbnail ${idx + 1}" onerror="this.src='/coding web IMK/parfy-php/foto/default.jpg'">
+                            <img src="${fixImgUrl(img)}" alt="Thumbnail ${idx + 1}" onerror="this.onerror=null; this.src='${BASE_PATH}/assets/default.jpg';">
                         </div>
                     `).join('');
                 }
@@ -720,14 +732,8 @@
             input.value = val;
         }
 
-        
         async function addToCart() {
             if (!currentProduct) return false;
-            
-            if (!PARFY.auth.isLoggedIn() || !PARFY.getUser()) {
-                promptLogin('menambahkan produk ke keranjang belanja');
-                return false;
-            }
 
             const btn = document.querySelector('.btn-add-cart');
             const originalHTML = btn.innerHTML;
@@ -746,22 +752,13 @@
             } catch (error) {
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
-                if (error.message.toLowerCase().includes('login') || error.message.toLowerCase().includes('unauthorized') || error.message.toLowerCase().includes('token')) {
-                    promptLogin('menambahkan produk ke keranjang belanja');
-                } else {
-                    Swal.fire('Error!', 'Gagal: ' + error.message, 'error');
-                }
+                Swal.fire('Error!', 'Gagal: ' + error.message, 'error');
                 return false;
             }
         }
 
         async function buyNow() {
             if (!currentProduct) return;
-
-            if (!PARFY.auth.isLoggedIn() || !PARFY.getUser()) {
-                promptLogin('melakukan pembelian produk ini');
-                return;
-            }
 
             const btn = document.querySelector('.btn-buy-now');
             const originalHTML = btn.innerHTML;
@@ -771,25 +768,20 @@
             const qty = parseInt(document.getElementById('qty-val').value);
             try {
                 await PARFY.cart.add(currentProduct.id, qty);
-                window.location.href = '/coding web IMK/parfy-php/keranjang';
+                window.location.href = BASE_PATH + '/keranjang';
             } catch (error) {
-                if (error.message.includes('login') || error.message.includes('unauthorized')) {
-                    promptLogin('melakukan pembelian produk ini');
-                } else {
-                    Swal.fire('Error!', error.message, 'error');
-                }
+                Swal.fire('Error!', error.message, 'error');
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
             }
         }
 
         async function loadCartCount() {
-            if (!PARFY.auth.isLoggedIn()) return;
             try {
                 const cart = await PARFY.cart.get();
                 const count = cart.items ? cart.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
                 const badge = document.getElementById('cart-count');
-                if (count > 0) {
+                if (badge && count > 0) {
                     badge.textContent = count;
                     badge.style.display = 'block';
                 }
@@ -800,10 +792,6 @@
 
         function openReviewModal() {
             if (!currentProduct) return;
-            if (!PARFY.auth.isLoggedIn() || !PARFY.getUser()) {
-                promptLogin('menulis ulasan untuk produk ini');
-                return;
-            }
             document.getElementById('reviewProductName').textContent = currentProduct.name;
             document.getElementById('reviewModal').style.display = 'flex';
             setStars(5);
@@ -836,12 +824,6 @@
         async function submitReview() {
             if (!currentProduct) return;
 
-            if (!PARFY.auth.isLoggedIn() || !PARFY.getUser()) {
-                closeReviewModal();
-                promptLogin('mengirim ulasan produk');
-                return;
-            }
-
             const rating = parseInt(document.getElementById('reviewRating').value);
             const comment = document.getElementById('reviewComment').value.trim();
 
@@ -866,11 +848,7 @@
                 // Force reload of reviews by fetching again
                 await loadReviews(currentProduct.id); 
             } catch (error) {
-                if (error.message.toLowerCase().includes('login') || error.message.toLowerCase().includes('unauthorized') || error.message.toLowerCase().includes('token')) {
-                    promptLogin('mengirim ulasan produk');
-                } else {
-                    Swal.fire('Error!', 'Gagal mengirim ulasan: ' + error.message, 'error');
-                }
+                Swal.fire('Error!', 'Gagal mengirim ulasan: ' + error.message, 'error');
             }
         }
 
