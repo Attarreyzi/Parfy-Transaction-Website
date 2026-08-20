@@ -1,41 +1,31 @@
 <?php
 /**
- * Image Compression Helper for PARFY.ID
- * Auto-compress uploaded images to WebP format
+ * Kompresi dan Pengolahan Gambar PARFY.ID
  */
 
 /**
- * Compress and convert image to WebP
- * @param string $sourcePath Path to original image
- * @param string $destPath Destination path for compressed image
- * @param int $quality Quality 1-100 (default: 75 for product cards)
- * @param int $maxWidth Maximum width (default: 800px)
- * @return bool Success status
+ * Kompresi dan konversi gambar ke format WebP
  */
 function compressImage(string $sourcePath, string $destPath, int $quality = 75, int $maxWidth = 800): bool
 {
-    // Check if file exists
     if (!file_exists($sourcePath)) {
-        error_log("CompressImage: Source file not found: $sourcePath");
+        error_log("CompressImage: File sumber tidak ditemukan: $sourcePath");
         return false;
     }
 
-    // Check GD library
     if (!extension_loaded('gd')) {
-        error_log("CompressImage: GD library not installed");
+        error_log("CompressImage: Ekstensi GD tidak aktif");
         return false;
     }
 
-    // Get image info
     $imageInfo = @getimagesize($sourcePath);
     if ($imageInfo === false) {
-        error_log("CompressImage: Invalid image file: $sourcePath");
+        error_log("CompressImage: File gambar tidak valid: $sourcePath");
         return false;
     }
 
     [$width, $height, $type] = $imageInfo;
 
-    // Load image based on type
     $sourceImage = null;
     switch ($type) {
         case IMAGETYPE_JPEG:
@@ -53,16 +43,15 @@ function compressImage(string $sourcePath, string $destPath, int $quality = 75, 
             }
             break;
         default:
-            error_log("CompressImage: Unsupported image type: $type");
+            error_log("CompressImage: Tipe gambar tidak didukung: $type");
             return false;
     }
 
-    if ($sourceImage === false || $sourceImage === null) {
-        error_log("CompressImage: Failed to create image from source: $sourcePath (type: $type)");
+    if (!$sourceImage) {
+        error_log("CompressImage: Gagal membuat gambar dari sumber: $sourcePath");
         return false;
     }
 
-    // Calculate new dimensions (maintain aspect ratio)
     if ($width > $maxWidth) {
         $newWidth = $maxWidth;
         $newHeight = (int) (($height / $width) * $maxWidth);
@@ -71,19 +60,15 @@ function compressImage(string $sourcePath, string $destPath, int $quality = 75, 
         $newHeight = $height;
     }
 
-    // Create new image with resampling (better quality)
     $destImage = imagecreatetruecolor($newWidth, $newHeight);
 
-    // Preserve transparency for PNG
     imagealphablending($destImage, false);
     imagesavealpha($destImage, true);
 
-    // Fill with white background (for JPEG fallback)
     $white = imagecolorallocate($destImage, 255, 255, 255);
     imagefill($destImage, 0, 0, $white);
     imagealphablending($destImage, true);
 
-    // Resample image
     imagecopyresampled(
         $destImage,
         $sourceImage,
@@ -97,50 +82,26 @@ function compressImage(string $sourcePath, string $destPath, int $quality = 75, 
         $height
     );
 
-    // Check WebP support and save
     $success = false;
     $webpSupport = function_exists('imagewebp') && (imagetypes() & IMG_WEBP);
 
     if ($webpSupport) {
-        // Save as WebP
         $success = @imagewebp($destImage, $destPath, $quality);
-        if (!$success) {
-            error_log("CompressImage: imagewebp failed, trying JPEG fallback");
-        }
     }
 
-    // Fallback to JPEG if WebP failed or not supported
     if (!$success) {
-        // Change extension to .jpg
         $destPath = preg_replace('/\.webp$/i', '.jpg', $destPath);
         $success = @imagejpeg($destImage, $destPath, $quality);
-        if ($success) {
-            error_log("CompressImage: Saved as JPEG (WebP not supported)");
-        }
     }
 
-    // Free memory
     imagedestroy($sourceImage);
     imagedestroy($destImage);
-
-    if ($success) {
-        // Log compression stats
-        $originalSize = filesize($sourcePath);
-        $compressedSize = filesize($destPath);
-        $savedPercent = round((1 - $compressedSize / $originalSize) * 100, 1);
-        error_log("CompressImage: {$sourcePath} ({$originalSize}b) -> {$destPath} ({$compressedSize}b) - Saved {$savedPercent}%");
-    } else {
-        error_log("CompressImage: All save methods failed for $sourcePath");
-    }
 
     return $success;
 }
 
 /**
- * Compress image with preset for product cards
- * @param string $sourcePath Source image path
- * @param string $destPath Destination path
- * @return bool Success status
+ * Kompresi gambar kartu produk
  */
 function compressProductCard(string $sourcePath, string $destPath): bool
 {
@@ -148,10 +109,7 @@ function compressProductCard(string $sourcePath, string $destPath): bool
 }
 
 /**
- * Compress image with preset for product detail
- * @param string $sourcePath Source image path
- * @param string $destPath Destination path
- * @return bool Success status
+ * Kompresi gambar detail produk
  */
 function compressProductDetail(string $sourcePath, string $destPath): bool
 {
@@ -159,12 +117,10 @@ function compressProductDetail(string $sourcePath, string $destPath): bool
 }
 
 /**
- * Compress image with preset for thumbnails
- * @param string $sourcePath Source image path
- * @param string $destPath Destination path
- * @return bool Success status
+ * Kompresi gambar thumbnail produk
  */
 function compressProductThumbnail(string $sourcePath, string $destPath): bool
 {
     return compressImage($sourcePath, $destPath, 70, 400);
 }
+
