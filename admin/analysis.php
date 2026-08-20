@@ -299,7 +299,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             const user = PARFY.getUser();
             if (!user || user.role !== 'admin') {
-                window.location.href = '/coding web IMK/parfy-php/login';
+                window.location.href = '/coding web IMK/parfy-php/admin/login.php';
                 return;
             }
 
