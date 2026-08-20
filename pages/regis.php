@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../config/google.php';
+$googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -101,6 +105,32 @@
             margin-bottom: 10px;
         }
 
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0 15px;
+        }
+
+        .divider span {
+            width: 130px;
+            height: 1px;
+            background: #ccc;
+        }
+
+        .divider p {
+            margin: 0 10px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .google-btn-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
         /* RIGHT PANEL */
         .right {
             width: 50%;
@@ -166,6 +196,7 @@
             }
         }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -176,26 +207,51 @@
         <!-- LEFT PANEL -->
         <div class="left">
             <div style="margin-bottom: 20px;">
-                <a href="./"
+                <a href="/coding web IMK/parfy-php/"
                     style="text-decoration: none; color: #555; font-size: 14px; display: flex; align-items: center; gap: 5px;">
-                    <i class="fas fa-arrow-left"></i> Back to Home
+                    <i class="fas fa-arrow-left"></i> Kembali ke Beranda
                 </a>
             </div>
-            <h1 class="title">Create an Account</h1>
+            <h1 class="title">Buat Akun Baru</h1>
 
             <form class="form" id="registerForm">
-                <input type="text" id="name" placeholder="Username (Hanya huruf)" pattern="[A-Za-z\s]+" title="Hanya boleh huruf dan spasi" required>
+                <input type="text" id="name" placeholder="Nama Lengkap" pattern="[A-Za-z\s]+" title="Hanya boleh huruf dan spasi" required>
                 <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password (Min 6 chars)" required>
+                <input type="password" id="password" placeholder="Password (Min 6 karakter)" required>
 
                 <div class="error" id="errorMsg">Registrasi gagal!</div>
 
                 <div class="remember-row">
-                    <label>Already have an account?</label>
-                    <a href="login" style="text-decoration:none;color:#444;">Login here</a>
+                    <label>Sudah punya akun?</label>
+                    <a href="login" style="text-decoration:none;color:#444;">Login di sini</a>
                 </div>
 
-                <button type="submit" class="login-btn">Register</button>
+                <button type="submit" class="login-btn">Daftar Sekarang</button>
+
+                <div class="divider">
+                    <span></span>
+                    <p>atau mendaftar dengan</p>
+                    <span></span>
+                </div>
+
+                <!-- Element Resmi Google Sign-In -->
+                <div id="g_id_onload"
+                     data-client_id="<?= htmlspecialchars($googleClientId) ?>"
+                     data-callback="handleGoogleLogin"
+                     data-auto_prompt="true">
+                </div>
+
+                <div class="google-btn-wrapper">
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="signup_with"
+                         data-shape="pill"
+                         data-logo_alignment="left"
+                         data-width="320">
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -225,7 +281,7 @@
 
             // Validasi nama hanya huruf dan spasi
             if (!/^[A-Za-z\s]+$/.test(name)) {
-                errorMsg.textContent = 'Username hanya boleh berisi huruf dan spasi.';
+                errorMsg.textContent = 'Nama hanya boleh berisi huruf dan spasi.';
                 errorMsg.style.display = 'block';
                 return;
             }
@@ -258,11 +314,51 @@
                 errorMsg.style.display = 'block';
             } finally {
                 registerBtn.disabled = false;
-                registerBtn.textContent = 'Register';
+                registerBtn.textContent = 'Daftar Sekarang';
             }
         });
+
+        // Google Sign-In Callback Handler untuk Pendaftaran
+        async function handleGoogleLogin(response) {
+            if (!response || !response.credential) return;
+
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.style.display = 'none';
+
+            try {
+                const res = await fetch('/coding web IMK/parfy-php/api/auth/google.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ credential: response.credential })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('parfy_token', data.token);
+                    localStorage.setItem('parfy_user', JSON.stringify(data.user));
+
+                    Swal.fire({
+                        title: 'Registrasi Berhasil!',
+                        text: 'Selamat datang, ' + data.user.name,
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = '/coding web IMK/parfy-php/dashboard';
+                    });
+                } else {
+                    errorMsg.textContent = data.error || 'Gagal mendaftar dengan Google!';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (err) {
+                errorMsg.textContent = 'Terjadi kesalahan sistem.';
+                errorMsg.style.display = 'block';
+            }
+        }
     </script>
 
 </body>
 
 </html>
+
