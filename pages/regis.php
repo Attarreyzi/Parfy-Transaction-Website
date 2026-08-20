@@ -221,11 +221,6 @@ $googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_
 
                 <div class="error" id="errorMsg">Registrasi gagal!</div>
 
-                <div class="remember-row">
-                    <label>Sudah punya akun?</label>
-                    <a href="login" style="text-decoration:none;color:#444;">Login di sini</a>
-                </div>
-
                 <button type="submit" class="login-btn">Daftar Sekarang</button>
 
                 <div class="divider">
@@ -264,7 +259,7 @@ $googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_
             <h1 class="brand">PARFY.ID</h1>
             <p class="tagline">PREMIUM PERFUME STORE</p>
 
-            <button class="register-btn" onclick="window.location.href='login'">Login</button>
+            <button class="register-btn" onclick="window.location.href='/coding web IMK/parfy-php/'">Beranda</button>
         </div>
 
     </div>

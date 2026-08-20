@@ -686,7 +686,7 @@
                 </div>
             </div>
 
-            <!-- SEARCH + LOGIN / REGISTER BUTTON -->
+            <!-- SEARCH BUTTON -->
             <div class="d-flex align-items-center ms-auto">
                 <div class="search-box-wrapper me-3 d-none d-lg-block" id="searchBoxWrapper" style="position: relative;">
                     <div class="search-input-group" id="searchInputGroup">
@@ -700,8 +700,6 @@
                     <div id="searchResultsDropdown" class="search-results-dropdown" style="display: none; position: absolute; top: calc(100% + 12px); right: 0; width: 340px; max-height: 400px; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 1050; padding: 10px;">
                     </div>
                 </div>
-                <a href="/coding web IMK/parfy-php/login" class="login-btn">LOGIN</a>
-                <a href="/coding web IMK/parfy-php/register" class="register-btn">REGISTER</a>
             </div>
         </div>
     </nav>
@@ -738,21 +736,21 @@
     <div class="container menu-section" id="best-seller">
         <h2 class="section-title">Best Notes Parfum</h2>
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4 category-item" onclick="promptLogin('melihat kategori Woody')"
+            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=woody'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/oud.jpg" alt="Woody">
                 </div>
                 <div class="category-title">WOODY</div>
             </div>
-            <div class="col-12 col-md-4 category-item" onclick="promptLogin('melihat kategori Sweet & Gourmand')"
+            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=sweet'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/vanilla.jpg" alt="Sweet">
                 </div>
                 <div class="category-title">SWEET & GOURMAND</div>
             </div>
-            <div class="col-12 col-md-4 category-item" onclick="promptLogin('melihat kategori Fresh & Aquatic')"
+            <div class="col-12 col-md-4 category-item" onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=fresh'"
                 style="cursor:pointer;">
                 <div class="img-circle-wrapper">
                     <img src="/coding web IMK/parfy-php/assets/fresh.jpg" alt="Fresh">
@@ -769,7 +767,7 @@
         </div>
         <div class="row row-cols-2 row-cols-md-5 justify-content-center">
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="promptLogin('melihat promo Stilettos')">
+                onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=promo'">
                 <span class="discount-badge">-15%</span>
                 <div class="promo-img-wrap"><img src="https://placehold.co/300x300/e91e63/white?text=Stilettos"
                         alt="Stilettos"></div>
@@ -780,7 +778,7 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="promptLogin('melihat promo Baby Love')">
+                onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=promo'">
                 <span class="discount-badge">-20%</span>
                 <div class="promo-img-wrap"><img src="https://placehold.co/300x300/ffb6c1/333?text=Baby+Love"
                         alt="Baby Love"></div>
@@ -791,7 +789,7 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="promptLogin('melihat promo HMNS ORGSM')">
+                onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=promo'">
                 <span class="discount-badge">-12%</span>
                 <div class="promo-img-wrap"><img src="https://placehold.co/300x300/8b0000/white?text=ORGSM" alt="ORGSM">
                 </div>
@@ -802,7 +800,7 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="promptLogin('melihat promo Moroccan Vanilla')">
+                onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=promo'">
                 <span class="discount-badge">-17%</span>
                 <div class="promo-img-wrap"><img src="https://placehold.co/300x300/d2691e/white?text=Moroccan"
                         alt="Moroccan Vanilla"></div>
@@ -813,7 +811,7 @@
                 </div>
             </div>
             <div class="col promo-item" style="cursor:pointer;"
-                onclick="promptLogin('melihat promo HMNS Alpha')">
+                onclick="window.location.href='/coding web IMK/parfy-php/kategori?notes=promo'">
                 <span class="discount-badge">-10%</span>
                 <div class="promo-img-wrap"><img src="https://placehold.co/300x300/006400/white?text=Alpha" alt="Alpha">
                 </div>
@@ -874,9 +872,9 @@
 
             return `
             <div class="col-6 col-md-3">
-                <div class="product-card" style="cursor: pointer;" onclick="promptLogin('melihat detail produk ${escapeHtml(product.name)}')">
+                <div class="product-card" style="cursor: pointer;" onclick="window.location.href='/coding web IMK/parfy-php/detail-produk?id=${product.id}'">
                     ${product.sold > 50 ? '<span class="badge-hot">HOT</span>' : ''}
-                    <div class="icon-cart-card" onclick="event.stopPropagation(); promptLogin('menambahkan produk ke keranjang')" title="Login untuk beli">
+                    <div class="icon-cart-card" onclick="event.stopPropagation(); window.location.href='/coding web IMK/parfy-php/detail-produk?id=${product.id}'" title="Lihat & Beli">
                         <i class="bi bi-basket"></i>
                     </div>
                     
@@ -891,7 +889,7 @@
                     </div>
 
                     <div class="card-footer-custom">
-                        <a href="#" class="btn-buy-now" onclick="event.stopPropagation(); promptLogin('membeli produk ini')">
+                        <a href="/coding web IMK/parfy-php/detail-produk?id=${product.id}" class="btn-buy-now" onclick="event.stopPropagation(); window.location.href='/coding web IMK/parfy-php/detail-produk?id=${product.id}'">
                             Buy now <i class="bi bi-arrow-up-right"></i>
                         </a>
                         <span class="price-pill">${formatPrice(product.price)}</span>
