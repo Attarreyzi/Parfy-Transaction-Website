@@ -229,6 +229,7 @@
             }
         }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -241,10 +242,10 @@
             <div style="margin-bottom: 20px;">
                 <a href="/coding web IMK/parfy-php/"
                     style="text-decoration: none; color: #555; font-size: 14px; display: flex; align-items: center; gap: 5px;">
-                    <i class="fas fa-arrow-left"></i> Back to Home
+                    <i class="fas fa-arrow-left"></i> Kembali ke Beranda
                 </a>
             </div>
-            <h1 class="title">Login to PARFY.ID</h1>
+            <h1 class="title">Login ke PARFY.ID</h1>
 
             <form class="form" id="loginForm">
                 <input type="email" id="email" placeholder="Email" required>
@@ -253,13 +254,28 @@
                 <div class="error" id="errorMsg">Email atau password salah!</div>
 
                 <div class="remember-row">
-                    <label><input type="checkbox"> Remember me</label>
-                    <a href="/coding web IMK/parfy-php/forgot-password" style="text-decoration:none;color:#444;">Forgot Password?</a>
+                    <label><input type="checkbox"> Ingat saya</label>
+                    <a href="/coding web IMK/parfy-php/forgot-password" style="text-decoration:none;color:#444;">Lupa Password?</a>
                 </div>
 
                 <button type="submit" class="login-btn">Login</button>
 
-                <!-- Social Login Removed -->
+                <div class="divider">
+                    <span></span>
+                    <p>atau masuk dengan</p>
+                    <span></span>
+                </div>
+
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                     data-callback="handleGoogleLogin"
+                     data-auto_prompt="false">
+                </div>
+
+                <button type="button" class="google-btn" onclick="triggerGoogleLogin()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                    <span>Lanjutkan dengan Google</span>
+                </button>
 
             </form>
         </div>
@@ -304,11 +320,9 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Save token and user info to localStorage (use same keys as api.js)
                     localStorage.setItem('parfy_token', data.token);
                     localStorage.setItem('parfy_user', JSON.stringify(data.user));
 
-                    // Redirect based on role
                     if (data.user.role === 'admin') {
                         window.location.href = '/coding web IMK/parfy-php/admin/dashboard.php';
                     } else {
@@ -326,6 +340,81 @@
                 loginBtn.textContent = 'Login';
             }
         });
+
+        // Google Sign-In Callback Handler
+        async function handleGoogleLogin(response) {
+            if (!response || !response.credential) return;
+
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.style.display = 'none';
+
+            try {
+                const res = await fetch('/coding web IMK/parfy-php/api/auth/google.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ credential: response.credential })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('parfy_token', data.token);
+                    localStorage.setItem('parfy_user', JSON.stringify(data.user));
+
+                    if (data.user.role === 'admin') {
+                        window.location.href = '/coding web IMK/parfy-php/admin/dashboard.php';
+                    } else {
+                        window.location.href = '/coding web IMK/parfy-php/dashboard';
+                    }
+                } else {
+                    errorMsg.textContent = data.error || 'Login Google gagal!';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (err) {
+                errorMsg.textContent = 'Terjadi kesalahan sistem.';
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        function triggerGoogleLogin() {
+            if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+                google.accounts.id.prompt();
+            } else {
+                Swal.fire({
+                    title: 'Login dengan Google',
+                    text: 'Masukkan alamat email Google Anda:',
+                    input: 'email',
+                    inputPlaceholder: 'nama@gmail.com',
+                    showCancelButton: true,
+                    confirmButtonText: 'Lanjutkan',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#005c97'
+                }).then(async (result) => {
+                    if (result.isConfirmed && result.value) {
+                        const email = result.value;
+                        const name = email.split('@')[0];
+
+                        try {
+                            const res = await fetch('/coding web IMK/parfy-php/api/auth/google.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email: email, name: name })
+                            });
+                            const data = await res.json();
+                            if (res.ok) {
+                                localStorage.setItem('parfy_token', data.token);
+                                localStorage.setItem('parfy_user', JSON.stringify(data.user));
+                                window.location.href = '/coding web IMK/parfy-php/dashboard';
+                            } else {
+                                Swal.fire('Gagal', data.error || 'Gagal masuk dengan Google', 'error');
+                            }
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                });
+            }
+        }
     </script>
 
 </body>
