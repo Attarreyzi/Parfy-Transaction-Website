@@ -127,17 +127,6 @@ if (preg_match('#^/(assets|js|foto)/#', $uri)) {
     exit;
 }
 
-// Admin routes
-if (preg_match('#^/admin/#', $uri)) {
-    $adminFile = __DIR__ . $uri;
-    if (!str_ends_with($adminFile, '.php')) {
-        $adminFile = preg_replace('#\.html$#', '.php', $adminFile);
-    }
-    if (file_exists($adminFile)) {
-        require $adminFile;
-        exit;
-    }
-}
 
 // Check if it's a direct PHP file request
 $directFile = __DIR__ . $uri;
