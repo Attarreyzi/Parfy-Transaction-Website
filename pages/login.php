@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/google.php';
-$googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : '';
-$isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClientId, 'YOUR_GOOGLE_CLIENT_ID');
+$googleClientId = defined('GOOGLE_CLIENT_ID') ? GOOGLE_CLIENT_ID : 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -126,47 +125,11 @@ $isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClien
             color: #777;
         }
 
-        .google-btn {
+        .google-btn-wrapper {
             width: 100%;
-            padding: 13px;
-            border-radius: 30px;
-            border: 1px solid #ddd;
-            background: white;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .google-btn img {
-            width: 20px;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-            gap: 22px;
-        }
-
-        .circle {
-            width: 50px;
-            height: 50px;
-            background: #efefef;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #444;
-        }
-
-        .circle:hover {
-            background: #ddd;
+            margin-top: 10px;
         }
 
         /* RIGHT PANEL */
@@ -271,18 +234,24 @@ $isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClien
                     <span></span>
                 </div>
 
-                <?php if ($isRealGoogleClientId): ?>
+                <!-- Element Resmi Google Sign-In -->
                 <div id="g_id_onload"
                      data-client_id="<?= htmlspecialchars($googleClientId) ?>"
                      data-callback="handleGoogleLogin"
-                     data-auto_prompt="false">
+                     data-auto_prompt="true">
                 </div>
-                <?php endif; ?>
 
-                <button type="button" class="google-btn" onclick="triggerGoogleLogin()">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                    <span>Lanjutkan dengan Google</span>
-                </button>
+                <div class="google-btn-wrapper">
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="pill"
+                         data-logo_alignment="left"
+                         data-width="320">
+                    </div>
+                </div>
 
             </form>
         </div>
@@ -302,7 +271,7 @@ $isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClien
     </div>
 
     <script>
-        const isRealGoogleId = <?= json_encode($isRealGoogleClientId) ?>;
+        const googleClientId = <?= json_encode($googleClientId) ?>;
 
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -350,7 +319,7 @@ $isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClien
             }
         });
 
-        // Google Sign-In Callback Handler
+        // Google Sign-In Callback Handler (Resmi dari Google SDK)
         async function handleGoogleLogin(response) {
             if (!response || !response.credential) return;
 
@@ -384,62 +353,9 @@ $isRealGoogleClientId = !empty($googleClientId) && !str_starts_with($googleClien
                 errorMsg.style.display = 'block';
             }
         }
-
-        function triggerGoogleLogin() {
-            if (isRealGoogleId && typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                google.accounts.id.prompt();
-            } else {
-                Swal.fire({
-                    title: 'Login dengan Google',
-                    text: 'Masukkan alamat email Google Anda:',
-                    input: 'email',
-                    inputPlaceholder: 'putrareyzi@gmail.com',
-                    inputValue: 'putrareyzi@gmail.com',
-                    showCancelButton: true,
-                    confirmButtonText: 'Lanjutkan dengan Google',
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#005c97'
-                }).then(async (result) => {
-                    if (result.isConfirmed && result.value) {
-                        const email = result.value;
-                        const name = email.split('@')[0];
-
-                        try {
-                            const res = await fetch('/coding web IMK/parfy-php/api/auth/google.php', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ email: email, name: name })
-                            });
-                            const data = await res.json();
-                            if (res.ok) {
-                                localStorage.setItem('parfy_token', data.token);
-                                localStorage.setItem('parfy_user', JSON.stringify(data.user));
-
-                                Swal.fire({
-                                    title: 'Berhasil Login!',
-                                    text: 'Selamat datang, ' + data.user.name,
-                                    icon: 'success',
-                                    timer: 1500,
-                                    showConfirmButton: false
-                                }).then(() => {
-                                    if (data.user.role === 'admin') {
-                                        window.location.href = '/coding web IMK/parfy-php/admin/dashboard.php';
-                                    } else {
-                                        window.location.href = '/coding web IMK/parfy-php/dashboard';
-                                    }
-                                });
-                            } else {
-                                Swal.fire('Gagal', data.error || 'Gagal masuk dengan Google', 'error');
-                            }
-                        } catch (e) {
-                            console.error(e);
-                        }
-                    }
-                });
-            }
-        }
     </script>
 
 </body>
 
-</html>
+</html>
+
