@@ -1,47 +1,84 @@
-# PARFY.ID - Premium Perfume Store
+# PARFY.ID
+*[Read in Bahasa Indonesia](#versi-indonesia)*
 
-PARFY.ID adalah aplikasi berbasis web yang dirancang khusus untuk toko online produk parfum premium dan pengelolaan transaksi jual beli. Aplikasi ini dibangun menggunakan Native PHP, basis data MySQL, HTML5, Vanilla CSS3 / Bootstrap 5, dan SweetAlert2.
+PARFY.ID is a web-based application designed to manage premium perfume retail sales and record daily transactions. Built using Native PHP and MySQL database, this system helps streamline online fragrance purchasing and store management.
 
-Fokus utama dari sistem ini adalah untuk memfasilitasi transaksi jual beli parfum secara online dengan antarmuka yang responsif, fitur belanja 100% Guest Shopping tanpa hambatan login bagi pembeli, serta menyajikan dashboard admin terisolasi untuk mengelola produk, memantau pergerakan stok, dan menganalisis laporan transaksi harian secara terstruktur.
+The primary focus of this system is to simplify online perfume shopping with a responsive interface, frictionless guest browsing, as well as providing a structured administrative dashboard to monitor stock and sales reports.
+
+## Live Demo & Preview
+Access the application locally via: [http://localhost:8000](http://localhost:8000)  
+*(Admin portal restricted access at `/admin`)*
+
+## Key Features
+- Product catalog and aroma category management
+- Multi-image product viewer with real-time stock indicators
+- Seamless 100% Guest Shopping (browse, cart, checkout, and review without mandatory login)
+- Customer rating and product review system
+- Statistical dashboard for monitoring sales and inventory
+- Admin authentication system and order status management
+
+## Technology Stack
+**Backend & Database:**
+- Native PHP
+- REST API
+- MySQL
+
+**Frontend & Interaction:**
+- HTML
+- CSS / Bootstrap
+- JavaScript
+
+## Local Installation
+To run this project locally, follow these steps:
+
+1. Clone this repository: `git clone https://github.com/Attarreyzi/Parfy-Transaction-Website.git`
+2. Place the project folder into your web server directory (e.g., `htdocs` for XAMPP).
+3. Create a new database in MySQL named `parfy_db`, then import the `database.sql` file.
+4. Configure database settings in `config/database.php`.
+5. Start local development server: `php -S localhost:8000`
+
+## Developer
+Developed by **[Attarreyzi](https://github.com/Attarreyzi)**
+
+---
+
+<h1 id="versi-indonesia">PARFY.ID (Versi Indonesia)</h1>
+
+PARFY.ID adalah aplikasi berbasis web yang dirancang untuk mengelola penjualan produk parfum premium dan mencatat transaksi harian. Aplikasi ini dibangun menggunakan Native PHP dan basis data MySQL.
+
+Fokus utama dari sistem ini adalah untuk mempermudah transaksi jual beli parfum secara online dengan antarmuka yang responsif, fitur belanja 100% Guest Shopping, serta menyajikan dashboard admin terstruktur untuk memantau stok dan laporan penjualan.
 
 ## Live Demo & Preview
 Aplikasi dapat diakses secara langsung melalui tautan lokal berikut: [http://localhost:8000](http://localhost:8000)  
-*(Portal Admin khusus Administrator di `/admin`)*
+*(Portal Admin tertutup khusus untuk Admin di `/admin`)*
 
 ## Fitur Utama
-- **Pengalaman Pembeli (100% Guest Shopping)**: Bebas menjelajah katalog, melihat detail produk, memilih varian aroma, menambah keranjang belanja, checkout, dan menulis ulasan tanpa harus login.
-- **Katalog & Galeri Produk**: Penampil multi-gambar slider foto botol parfum asli (hingga 3 foto), deskripsi aroma, indikator stok real-time, dan harga rupiah.
-- **Pencarian Live & Filter Kategori**: Pencarian cepat dan penyaringan produk berdasarkan kategori aroma (*Woody, Sweet, Fresh, Promo*).
-- **Keranjang Belanja & Checkout Interaktif**: Manajemen kuantitas otomatis, kalkulasi total harga, alamat pengiriman, dan riwayat pesanan.
-- **Ulasan & Rating Pembeli**: Sistem umpan balik bintang 1–5 dan komentar ulasan langsung di halaman produk.
-- **Portal Administrator (`/admin`)**: Dashboard statistik bisnis, manajemen inventaris produk, pengelolaan stok, pemrosesan transaksi pengiriman (*Pending, Diproses, Dikirim, Selesai*), moderasi ulasan, dan analisis grafik penjualan.
+- Manajemen data produk dan kategori aroma
+- Penampil multi-gambar produk dengan indikator stok real-time
+- Belanja 100% Guest Shopping (jelajah, keranjang, checkout, dan ulasan tanpa wajib login)
+- Sistem pemberian rating dan ulasan pembeli
+- Dashboard statistik untuk memantau data penjualan dan inventaris
+- Sistem otentikasi admin dan pemrosesan status pesanan
 
 ## Stack Teknologi
 **Backend & Database:**
-- Native PHP (Express-style Router di `index.php`)
-- REST API (`/api/*`)
-- MySQL (`parfy_db`)
+- Native PHP
+- REST API
+- MySQL
 
 **Frontend & Interaksi:**
-- HTML5 & Vanilla CSS3
-- Bootstrap 5 & FontAwesome 6 / Bootstrap Icons
-- JavaScript (ES6+), SweetAlert2, & Chart.js
+- HTML
+- CSS / Bootstrap
+- JavaScript
 
 ## Instalasi Lokal
 Untuk menjalankan proyek ini di perangkat lokal, ikuti langkah-langkah berikut:
 
 1. Salin (clone) repositori ini: `git clone https://github.com/Attarreyzi/Parfy-Transaction-Website.git`
 2. Pindahkan folder proyek ke dalam direktori web server (misalnya `htdocs` pada XAMPP).
-3. Buat database baru di MySQL dengan nama `parfy_db`, lalu import file `database.sql`.
+3. Buat basis data baru di MySQL dengan nama `parfy_db`, lalu import file `database.sql`.
 4. Sesuaikan pengaturan koneksi database pada file `config/database.php`.
-5. Jalankan server lokal:
-   - **Opsi A (PHP Built-in Server)**: Buka terminal di folder proyek lalu jalankan `php -S localhost:8000`. Akses `http://localhost:8000` di browser.
-   - **Opsi B (Apache XAMPP)**: Akses `http://localhost/coding%20web%20IMK/parfy-php/` di browser.
-
-## Hak Akses Admin
-- **Portal Admin**: `http://localhost:8000/admin`
-- **Email**: `admin@parfy.id`
-- **Password**: `admin123`
+5. Jalankan server lokal: `php -S localhost:8000`
 
 ## Developer / Pengembang
 Dikembangkan oleh **[Attarreyzi](https://github.com/Attarreyzi)**
