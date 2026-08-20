@@ -1,5 +1,4 @@
-// API Helper untuk PARFY.ID PHP Backend
-// Modified for PHP API endpoints
+// API Helper untuk PARFY.ID
 const API_BASE = '/coding web IMK/parfy-php/api';
 
 // Token management
@@ -219,13 +218,6 @@ const cartAPI = {
     },
 
     async update(productId, quantity) {
-        return await apiRequest(`/cart/${productId}`, {
-            method: 'PUT',
-            body: { quantity }
-        });
-    },
-
-    async updateQuantity(productId, quantity) {
         return await apiRequest(`/cart/${productId}`, {
             method: 'PUT',
             body: { quantity }

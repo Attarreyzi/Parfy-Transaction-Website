@@ -901,11 +901,6 @@
         `;
         }
 
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        }
-
         // Function prompt login with SweetAlert modal
         function promptLogin(actionText = 'mengakses fitur ini') {
             Swal.fire({
@@ -925,7 +920,7 @@
             });
         }
 
-        // Render pagination - unauthenticated visitors can browse pages freely
+        // Render pagination
         function renderPagination(totalProducts) {
             const totalPages = Math.ceil(totalProducts / productsPerPage);
             const container = document.getElementById('paginationContainer');
@@ -1191,16 +1186,6 @@
             }
         }
 
-        function applySearchToCollection() {
-            const dropdown = document.getElementById('searchResultsDropdown');
-            if (dropdown) dropdown.style.display = 'none';
-
-            const collectionEl = document.getElementById('collection-section');
-            if (collectionEl) {
-                collectionEl.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/[&<>"']/g, function(m) {
@@ -1220,8 +1205,6 @@
         // Fetch products from API
         async function fetchProducts() {
             try {
-                // Use the same API endpoint as dashboardlogin.php
-                // INFO: Menggunakan alamat lengkap (Absolute Path) agar aman dari folder manapun
                 const response = await fetch('/coding web IMK/parfy-php/api/products/index.php');
                 const data = await response.json();
 

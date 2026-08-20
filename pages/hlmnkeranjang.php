@@ -1003,7 +1003,7 @@
         }
       });
 
-      // Fix selector: Use .cart-summary to scope it, and find rows
+      // Update summary box
       const summaryBox = document.querySelector('.cart-summary');
       if (summaryBox) {
         const rows = summaryBox.querySelectorAll('.summary-row');

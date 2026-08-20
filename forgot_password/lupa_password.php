@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once __DIR__ . '/../config/database.php';
 
-$conn = getDB(); // Fix: getDB() returns the literal mysqli connection object
+$conn = getDB();
 $error = "";
 $success = "";
 

@@ -929,7 +929,6 @@
         }
 
         // Render pagination
-        // Render pagination - FIXED for dynamic window
         function renderPagination(totalProducts) {
             const totalPages = Math.ceil(totalProducts / productsPerPage);
             const container = document.getElementById('paginationContainer');
@@ -1266,8 +1265,6 @@
 
         async function fetchProducts() {
             try {
-                // Use the same API endpoint as dashboardlogin.php
-                // INFO: Menggunakan alamat lengkap (Absolute Path) agar aman dari folder manapun
                 const response = await fetch('/coding web IMK/parfy-php/api/products/index.php');
                 const data = await response.json();
 
