@@ -1,9 +1,4 @@
 <?php
-/**
- * POST /api/payment/confirm.php
- * Confirm payment success from client Snap popup
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

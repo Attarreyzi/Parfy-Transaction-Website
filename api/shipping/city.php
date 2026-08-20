@@ -1,9 +1,4 @@
 <?php
-/**
- * GET /api/shipping/city?province=PROVINCE_ID
- * Returns list of cities/kabupaten using BinderByte API
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 

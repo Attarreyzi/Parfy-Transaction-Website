@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/cart/item.php
- * PUT: Update item quantity
- * DELETE: Remove item from cart
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -28,7 +22,7 @@ if (empty($productId)) {
 
 $productIdEsc = $db->real_escape_string($productId);
 
-// PUT - Update quantity
+// Update data
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $data = getJsonBody();
     $quantity = (int) ($data['quantity'] ?? 1);
@@ -59,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     jsonResponse(['message' => 'Quantity berhasil diupdate!']);
 }
 
-// DELETE - Remove item
+// Hapus data
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $cartCheck = $db->query("SELECT * FROM carts WHERE user_id = '$userId' AND product_id = '$productIdEsc'");
     if (!$cartCheck || $cartCheck->num_rows === 0) {

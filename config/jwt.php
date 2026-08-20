@@ -1,16 +1,13 @@
 <?php
 /**
- * JWT Helper for PARFY.ID
- * Simple JWT implementation for PHP 8.2
+ * Pengelolaan JWT (JSON Web Token) PARFY.ID
  */
 
-// Production: set JWT_SECRET in Azure App Service > Configuration
 define('JWT_SECRET', getenv('JWT_SECRET') ?: 'parfy_secret_key_2024_very_secure');
-define('JWT_EXPIRY', 60 * 60 * 24 * 7); // 7 days
-
+define('JWT_EXPIRY', 60 * 60 * 24 * 7);
 
 /**
- * Create JWT token
+ * Buat token JWT
  */
 function createToken(array $payload): string
 {
@@ -27,7 +24,7 @@ function createToken(array $payload): string
 }
 
 /**
- * Verify and decode JWT token
+ * Verifikasi token JWT
  */
 function verifyToken(string $token): ?array
 {
@@ -37,17 +34,14 @@ function verifyToken(string $token): ?array
 
     [$header, $payload, $signature] = $parts;
 
-    // Verify signature
     $expectedSignature = base64_encode(hash_hmac('sha256', "$header.$payload", JWT_SECRET, true));
     if (!hash_equals($expectedSignature, $signature))
         return null;
 
-    // Decode payload
     $data = json_decode(base64_decode($payload), true);
     if (!$data)
         return null;
 
-    // Check expiry
     if (isset($data['exp']) && $data['exp'] < time())
         return null;
 
@@ -55,7 +49,7 @@ function verifyToken(string $token): ?array
 }
 
 /**
- * Get current user from Authorization header
+ * Ambil data user yang sedang login dari header Authorization
  */
 function getCurrentUser(): ?array
 {
@@ -79,7 +73,6 @@ function getCurrentUser(): ?array
     if (!$payload || empty($userIdRaw))
         return null;
 
-    // Get user from database
     require_once __DIR__ . '/database.php';
     $db = getDB();
     $userId = $db->real_escape_string($userIdRaw);
@@ -94,25 +87,26 @@ function getCurrentUser(): ?array
 }
 
 /**
- * Require authentication middleware
+ * Validasi otentikasi user
  */
 function requireAuth(): array
 {
     $user = getCurrentUser();
     if (!$user) {
-        jsonResponse(['error' => 'Unauthorized. Token tidak valid atau sudah expired.'], 401);
+        jsonResponse(['error' => 'Akses ditolak. Token tidak valid atau kedaluwarsa.'], 401);
     }
     return $user;
 }
 
 /**
- * Require admin role
+ * Validasi otorisasi admin
  */
 function requireAdmin(): array
 {
     $user = requireAuth();
     if ($user['role'] !== 'admin') {
-        jsonResponse(['error' => 'Forbidden. Hanya admin yang bisa mengakses.'], 403);
+        jsonResponse(['error' => 'Akses ditolak. Hanya admin yang diperbolehkan.'], 403);
     }
     return $user;
 }
+

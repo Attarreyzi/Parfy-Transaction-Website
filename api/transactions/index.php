@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/transactions/index.php
- * GET: List transactions
- * POST: Create new transaction
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -70,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 
-// POST - Create transaction
+// Proses data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = getJsonBody();
 

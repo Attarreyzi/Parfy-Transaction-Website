@@ -1,12 +1,4 @@
 <?php
-/**
- * POST /api/payment/notification.php
- * Handle Midtrans payment notification (webhook)
- * 
- * Set this URL in Midtrans Dashboard > Settings > Configuration > Payment Notification URL
- * Example: https://yourdomain.com/api/payment/notification.php
- */
-
 header('Content-Type: application/json');
 
 require_once __DIR__ . '/../../config/database.php';

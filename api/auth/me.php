@@ -1,9 +1,4 @@
 <?php
-/**
- * GET /api/auth/me.php
- * Get current user info
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

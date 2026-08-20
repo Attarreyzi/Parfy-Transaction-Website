@@ -1,9 +1,4 @@
 <?php
-/**
- * POST /api/products/upload.php
- * Upload product image (admin only) with auto-compression to WebP
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/products/index.php
- * GET: List all products with filters
- * POST: Add new product (admin only)
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -92,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     jsonResponse($products);
 }
 
-// POST - Add product (admin only)
+// Proses data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = requireAdmin();
 

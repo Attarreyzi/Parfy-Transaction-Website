@@ -1,9 +1,4 @@
 <?php
-/**
- * GET /api/shipping/province
- * Returns list of Indonesian provinces using BinderByte API
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 

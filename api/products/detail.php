@@ -1,11 +1,4 @@
 <?php
-/**
- * /api/products/detail.php
- * GET: Get product detail
- * PUT: Update product (admin only)
- * DELETE: Delete product (admin only)
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -28,7 +21,7 @@ if (empty($productId)) {
 
 $productIdEsc = $db->real_escape_string($productId);
 
-// GET - Get product detail
+// Ambil data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $db->query("SELECT * FROM products WHERE id = '$productIdEsc'");
 
@@ -67,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ]);
 }
 
-// PUT - Update product (admin only)
+// Update data
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $user = requireAdmin();
 
@@ -136,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     ]);
 }
 
-// DELETE - Delete product (admin only)
+// Hapus data
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $user = requireAdmin();
 

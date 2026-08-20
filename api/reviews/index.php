@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/reviews/index.php
- * GET: List reviews
- * POST: Add review
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -56,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     jsonResponse($reviews);
 }
 
-// POST - Add review
+// Proses data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = requireAuth();
 
@@ -97,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ], 201);
 }
 
-// DELETE - Delete review
+// Hapus data
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $user = requireAuth();
 

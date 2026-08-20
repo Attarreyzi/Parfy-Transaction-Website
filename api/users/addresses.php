@@ -1,12 +1,4 @@
 <?php
-/**
- * /api/users/addresses.php
- * GET: Get user addresses
- * POST: Add new address
- * PUT: Update address
- * DELETE: Delete address
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -48,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     jsonResponse($addresses);
 }
 
-// POST - Add address
+// Proses data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = getJsonBody();
 
@@ -91,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ], 201);
 }
 
-// PUT - Update address
+// Update data
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $addressId = (int) ($_GET['id'] ?? 0);
     if ($addressId <= 0) {
@@ -154,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     jsonResponse(['message' => 'Alamat berhasil diupdate!']);
 }
 
-// DELETE - Delete address
+// Hapus data
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $addressId = (int) ($_GET['id'] ?? 0);
     if ($addressId <= 0) {

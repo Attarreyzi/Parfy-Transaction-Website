@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/transactions/detail.php
- * GET: Get transaction detail
- * PUT: Update transaction status (admin only)
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -28,7 +22,7 @@ if (empty($transactionId)) {
 
 $transactionIdEsc = $db->real_escape_string($transactionId);
 
-// GET - Get transaction detail
+// Ambil data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $db->query("SELECT * FROM transactions WHERE id = '$transactionIdEsc'");
 
@@ -73,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ]);
 }
 
-// PUT - Update status (admin only)
+// Update data
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if ($user['role'] !== 'admin') {
         jsonResponse(['error' => 'Hanya admin yang bisa update status.'], 403);

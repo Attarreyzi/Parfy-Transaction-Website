@@ -1,10 +1,4 @@
 <?php
-/**
- * /api/users/profile.php
- * GET: Get user profile
- * PUT: Update user profile
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -21,7 +15,7 @@ $user = requireAuth();
 $db = getDB();
 $userId = $db->real_escape_string($user['id']);
 
-// GET - Get profile
+// Ambil data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $db->query("SELECT id, name, email, role, phone, gender, birth_date FROM users WHERE id = '$userId'");
 
@@ -42,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ]);
 }
 
-// PUT - Update profile
+// Update data
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $data = getJsonBody();
     $updates = [];

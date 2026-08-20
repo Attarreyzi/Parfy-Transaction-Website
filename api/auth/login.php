@@ -1,9 +1,4 @@
 <?php
-/**
- * POST /api/auth/login.php
- * User login
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

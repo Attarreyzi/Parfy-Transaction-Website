@@ -1,11 +1,4 @@
 <?php
-/**
- * /api/cart/index.php
- * GET: Get user's cart
- * POST: Add item to cart
- * DELETE: Clear cart
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -22,7 +15,7 @@ $user = requireAuth();
 $db = getDB();
 $userId = $db->real_escape_string($user['id']);
 
-// GET - Get cart
+// Ambil data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "SELECT c.*, p.id as product_id, p.name, p.price, p.image, p.stock 
             FROM carts c 
@@ -59,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     ]);
 }
 
-// POST - Add to cart
+// Proses data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = getJsonBody();
 
@@ -105,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 }
 
-// DELETE - Clear cart
+// Hapus data
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $db->query("DELETE FROM carts WHERE user_id = '$userId'");
 

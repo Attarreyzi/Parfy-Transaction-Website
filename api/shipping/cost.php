@@ -1,10 +1,4 @@
 <?php
-/**
- * POST /api/shipping/cost.php
- * Calculate shipping cost - STATIC DATA
- * Note: BinderByte API does not have ongkir/cost endpoint
- */
-
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');

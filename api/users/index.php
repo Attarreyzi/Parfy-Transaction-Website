@@ -1,9 +1,4 @@
 <?php
-/**
- * /api/users/index.php
- * GET: List all users (admin only)
- */
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

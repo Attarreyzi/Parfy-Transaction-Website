@@ -1,9 +1,4 @@
 <?php
-/**
- * POST /api/payment/create.php
- * Create Midtrans Snap Token for payment popup
- */
-
 // FORCE JSON OUTPUT - Suppress all HTML errors
 ini_set('display_errors', 0);
 error_reporting(0);
