@@ -25,7 +25,7 @@ Access the application locally via: [http://localhost:8000](http://localhost:800
 
 **Frontend & Interaction:**
 - HTML
-- CSS / Bootstrap
+- CSS 
 - JavaScript
 
 ## Local Installation
